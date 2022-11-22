@@ -28,10 +28,10 @@ https://docs.google.com/spreadsheets/d/14Egh7F4bJAEscsrHyR00C-VTOc5TkQwsGOf9Uugv
 https://www.figma.com/file/kgs1eJRMXOIG3nyHswIlMY/Kaizen-app%E3%81%AE%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?node-id=23%3A1016&t=yLXc41Np1FWMBiEr-1
 
 ## ER図
-<%= image_tag 'ER図.jpeg' %>
+![4692D84D-0296-46EE-8323-AEB635BC64D9](https://user-images.githubusercontent.com/112865440/203374659-fa301d33-e277-4332-8137-20c3b194d64f.jpeg)
 
 
 ## 画面遷移図
-<%= image_tag '画面遷移図.jpeg' %>
+![32264B7A-A881-4925-A876-846790CDC7E9](https://user-images.githubusercontent.com/112865440/203374715-50ee03cc-343b-41e0-8ae7-5ccb01ab76fd.jpeg)
 
 
