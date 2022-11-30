@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "tasks#index"
+  root to: "issues#index"
   resources :issues
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
