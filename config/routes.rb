@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'users/show'
   resources :issues
   root 'issues#index'
@@ -10,12 +11,12 @@ Rails.application.routes.draw do
   }
   resources :users, only: :show
 
-  devise_scope :user do
+  # devise_scope :user do
     # root "users/sessions#new"
-    get "signup", to: "users/registrations#new"
-    get "login", to: "users/sessions#new"
-    delete "logout", to: "users/sessions#destroy"
-  end
+  #   get "signup", to: "users/registrations#new"
+  #   get "login", to: "users/sessions#new"
+  #   delete "logout", to: "users/sessions#destroy"
+  # end
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
