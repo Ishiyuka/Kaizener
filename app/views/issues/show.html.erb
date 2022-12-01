@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @issue.title %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @issue.detail %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @issue.image %>
+</p>
+
+<p>
+  <strong>Cause:</strong>
+  <%= @issue.cause %>
+</p>
+
+<p>
+  <strong>Goal:</strong>
+  <%= @issue.goal %>
+</p>
+
+<p>
+  <strong>Gap:</strong>
+  <%= @issue.gap %>
+</p>
+
+<p>
+  <strong>Due date at:</strong>
+  <%= @issue.due_date_at %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @issue.priority %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @issue.status %>
+</p>
+
+<p>
+  <strong>Done flag:</strong>
+  <%= @issue.done_flag %>
+</p>
+
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %>
