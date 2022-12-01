@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  root 'homes#index'
   resources :teams
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'users/show'
   resources :issues
-  root 'issues#index'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
