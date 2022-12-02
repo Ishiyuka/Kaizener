@@ -14,11 +14,16 @@
 #               )
 # end
 
-User.create!(
-  name: 'admin',
-  department: '部署1',
-  email: 'admin@example.com',
-  admin: true,
-  password: 'password',
-  password_confirmation: 'password',
-)
+# User.create!(
+#   name: 'admin',
+#   department: '部署1',
+#   email: 'admin@example.com',
+#   admin: true,
+#   password: 'password',
+#   password_confirmation: 'password',
+# )
+
+5.times do |n|
+  Team.create!(name: "team#{n + 1}",
+              )
+end
