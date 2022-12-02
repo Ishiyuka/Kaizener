@@ -5,12 +5,6 @@
   <%= @team.name %>
 </p>
 
-<p>
-  <strong>メンバー:</strong><br>
-    <% @assigns.each do |user| %>
-      <%= user.name %>
-    <% end %>
-</p>
 
   <% if @assign.present? %>
     <%= link_to 'チームから外す', assign_path(id: @assign.id), method: :delete, class: 'btn btn-danger' %>
