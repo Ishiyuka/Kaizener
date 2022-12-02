@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Action:</strong>
+  <%= @plan.action %>
+</p>
+
+<p>
+  <strong>Pic:</strong>
+  <%= @plan.pic %>
+</p>
+
+<p>
+  <strong>Due date at:</strong>
+  <%= @plan.due_date_at %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @plan.status %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= @plan.feedback %>
+</p>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>
