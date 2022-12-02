@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_01_074553) do
+ActiveRecord::Schema.define(version: 2022_12_02_012949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 2022_12_01_074553) do
     t.boolean "done_flag", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.text "action"
+    t.string "pic"
+    t.date "due_date_at"
+    t.integer "status"
+    t.integer "feedback"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -57,4 +69,5 @@ ActiveRecord::Schema.define(version: 2022_12_01_074553) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "plans", "users"
 end
