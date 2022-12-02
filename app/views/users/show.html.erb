@@ -15,3 +15,7 @@
 </p>
 
 <%= button_to '管理者ページ', rails_admin_path, method: :get, class: "btn admin-btn" %>
+
+<%= link_to 'チーム一覧', teams_path(@team) %>
+<%= link_to '課題一覧', issues_path(@issues) %>
+<%= link_to 'アクションプラン一覧', plans_path(@plan) %>

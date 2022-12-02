@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root 'homes#index'
   resources :teams
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'users/show'
   resources :issues
 
   devise_for :users, controllers: {
@@ -12,6 +11,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
   resources :users, only: :show
+  resources :assigns, only: %i[index create destroy]
 
   # devise_scope :user do
     # root "users/sessions#new"
