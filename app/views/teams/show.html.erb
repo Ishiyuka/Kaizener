@@ -5,6 +5,22 @@
   <%= @team.name %>
 </p>
 
+<p>
+  <strong>Team ID:</strong>
+  <%= @team.id %>
+</p>
+
+<table class="table">
+  <tbody>
+    <% @team.assigns.each do |assign| %>
+      <tr>
+        <td><%= assign.user.email %></td>
+        <td><%= link_to "削除", assign_path, method: :delete, class: 'btn btn-sm btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
   <% if @assign.present? %>
     <%= link_to 'チームから外す', assign_path(id: @assign.id), method: :delete, class: 'btn btn-danger' %>
@@ -14,3 +30,4 @@
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
+<%= link_to '課題一覧', issues_path %>

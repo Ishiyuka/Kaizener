@@ -1,4 +1,4 @@
-<h2>Users</h2>
+<h2><%= "#{@user.name}のマイページ" %></h2>
 <hr/>
 
 <p>
@@ -13,6 +13,20 @@
     <strong>e-mail</strong>
     <%= @user.email %>
 </p>
+
+<div>
+    <strong>所属チーム</strong>
+    <table class="table">
+    <tbody>
+        <% @user.assign_teams.each do |team| %>
+        <tr>
+            <td><%= team.name %></td>
+            <td><%= link_to "詳細", teams_path %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+</div>
 
 <%= button_to '管理者ページ', rails_admin_path, method: :get, class: "btn admin-btn" %>
 

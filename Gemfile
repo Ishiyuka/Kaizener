@@ -77,3 +77,6 @@ gem 'devise-i18n'
 # 管理者画面
 gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
+
+#検索機能
+gem 'ransack'

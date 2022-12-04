@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1 or /teams/1.json
   def show
     @assing = current_user.assigns.find_by(team_id: @team.id)
-    @assings = @team.assigns_users
+    @assings = @team.assign_users
   end
 
   # GET /teams/new
@@ -25,34 +25,26 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
-
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @team.save
+      redirect_to teams_path(current_user), notice: "チームを作成しました"
+    else
+      render 'new',notice: "作成出来ませんでした"
     end
   end
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
-    respond_to do |format|
-      if @team.update(team_params)
-        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    if @team.update(team_params)
+      redirect_to teams_path(params[:team_id]), notice: "更新しました"
+    else
+      render :edit, notice: "更新できませんでした"
     end
   end
 
   # DELETE /teams/1 or /teams/1.json
   def destroy
     @team.destroy
-
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
-    end
+    redirect_to teams_path(params[:team_id])
   end
 
   private

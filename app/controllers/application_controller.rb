@@ -17,4 +17,5 @@ class ApplicationController < ActionController::Base
       authorize! :access_admin_page
     end
   end
+
 end
