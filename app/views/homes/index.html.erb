@@ -7,3 +7,11 @@
 <p>担当者</p>
 <p>結果</p>
 <p>評価</p>
+
+<% if user_signed_in? %>
+  <%= link_to '課題一覧', issues_path %> |
+  <%= link_to '課題追加', new_issue_path %>
+<% else %>
+  <%= link_to 'ゲスト(一般)ログイン', users_guest_sign_in_path, method: :post %> |
+  <%= link_to 'ゲスト(管理者)ログイン', users_guest_admin_sign_in_path, method: :post %>
+<% end %>
