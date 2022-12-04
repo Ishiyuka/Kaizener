@@ -1,24 +1,9 @@
-<h1>Issues</h1>
-
-<%= search_form_for @issue_q, url: search_issues_path do |f| %>
-  <%= f.label :title_cont, '課題名' %>
-  <%= f.search_field :title_cont %>
-  <%= f.submit '検索' %>
-<% end %>
-
-<%= search_form_for @issue_q, url: search_issues_path do |f| %>
-  <%= f.label :status, '進捗:' %>
-  <%= f.radio_button :status_eq, '0' %>未完了
-  <%= f.radio_button :status_eq, '1' %>進行中
-  <%= f.radio_button :status_eq, '2' %>完了
-  <%= f.submit '検索' %>
-<% end %>
+<h1>課題検索結果</h1>
 
 <table>
   <thead>
     <tr>
       <th></th>
-      <th>Team</th>
       <th>Title</th>
       <th><%= sort_link(@issue_q, :due_date_at, "期限日") %></th>
       <th><%= sort_link(@issue_q, :priority, "優先度") %></th>
@@ -28,14 +13,13 @@
   </thead>
 
   <tbody>
-    <% @issues.each do |issue| %>
+    <% @results.each do |issue| %>
       <tr>
         <% if issue.done_flag == true %>
           <td> 完了 </td>
         <% else %>
           <td>未完了</td>
         <% end %>
-          <td><%= issue.team.name %></td>
           <td><%= issue.title %></td>
           <td><%= issue.due_date_at %></td>
           <td><%= issue.priority %></td>
@@ -51,3 +35,4 @@
 <br>
 
 <%= link_to 'New Issue', new_issue_path %>
+<%= link_to 'Back', issues_path %>

@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :team %>
+    <%= form.collection_select(:team_id, @teams, :id, :name, include_blank: "選択して下さい" )  %>
+  </div>
+
+  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
   </div>
@@ -43,17 +48,17 @@
 
   <div class="field">
     <%= form.label :due_date_at %>
-    <%= form.date_select :due_date_at %>
+    <%= form.date_field :due_date_at %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
-    <%= form.number_field :priority %>
+    <%= form.label :status %><br>
+    <%= form.select :status, Issue.statuses.keys.to_a,include_blank: "選択して下さい"  %>
   </div>
 
   <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status %>
+    <%= form.label :priority %><br>
+    <%= form.select :priority, Issue.priorities.keys.to_a,include_blank: "選択して下さい"  %>
   </div>
 
   <div class="field">
