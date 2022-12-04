@@ -24,3 +24,6 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<%= link_to 'ゲスト（一般）ログイン', users_guest_sign_in_path, method: :post %><br>
+<%= link_to 'ゲスト（管理者）ログイン', users_guest_admin_sign_in_path, method: :post %>

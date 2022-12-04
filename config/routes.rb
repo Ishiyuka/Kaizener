@@ -4,21 +4,19 @@ Rails.application.routes.draw do
   resources :teams
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   # resources :issues
+  resources :users, only: :show
+  resources :assigns, only: %i[index create destroy]
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     passwords: 'users/passwords'
   }
-  resources :users, only: :show
-  resources :assigns, only: %i[index create destroy]
 
-  # devise_scope :user do
-    # root "users/sessions#new"
-  #   get "signup", to: "users/registrations#new"
-  #   get "login", to: "users/sessions#new"
-  #   delete "logout", to: "users/sessions#destroy"
-  # end
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    post 'users/guest_admin_sign_in', to: 'users/sessions#guest_admin_sign_in'
+  end
 
   resources :issues do
     collection do
