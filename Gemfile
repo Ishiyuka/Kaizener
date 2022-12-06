@@ -80,3 +80,7 @@ gem 'cancancan'
 
 #検索機能
 gem 'ransack'
+
+#画像アップロード
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem 'mini_magick'

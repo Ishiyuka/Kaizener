@@ -24,4 +24,5 @@ class User < ApplicationRecord
       user.admin = true
     end
   end
+  mount_uploader :icon, ImageUploader
 end
