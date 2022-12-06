@@ -2,6 +2,15 @@
 <hr/>
 
 <p>
+    <strong>プロフィール画像</strong><br>
+    <% if @user.icon?%>
+        <%= image_tag @user.icon.url, class: "rounded-circle", size: "150x150"%>
+    <% else%>
+        <p>画像はありません</p>
+    <%end%>
+</p>
+
+<p>
     <strong>ユーザー名</strong>
     <%= @user.name %>
 </p>
@@ -30,6 +39,7 @@
 
 <%= button_to '管理者ページ', rails_admin_path, method: :get, class: "btn admin-btn" %>
 
+<%= link_to "編集", edit_user_registration_path %>
 <%= link_to 'チーム一覧', teams_path(@team) %>
 <%= link_to '課題一覧', issues_path(@issues) %>
 <%= link_to 'アクションプラン一覧', plans_path(@plan) %>
