@@ -4,12 +4,11 @@
 <p>
     <strong>プロフィール画像</strong><br>
     <% if @user.icon?%>
-        <%= image_tag @user.icon.url, class: "rounded-circle", size: "150x150"%>
+        <%= image_tag @user.icon.url, style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;"%>
     <% else%>
-        <p>画像はありません</p>
+        <%= image_tag "default_icon.jpeg", style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;" %>
     <%end%>
 </p>
-
 <p>
     <strong>ユーザー名</strong>
     <%= @user.name %>
