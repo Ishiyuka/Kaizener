@@ -64,7 +64,7 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:title, :detail, :image, :cause, :goal, :gap, :due_date_at, :priority, :status, :done_flag)
+      params.require(:issue).permit(:title, :detail, :image, :image_cache, :cause, :goal, :gap, :due_date_at, :priority, :status, :done_flag)
     end
 
     def set_q
