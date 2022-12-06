@@ -11,8 +11,21 @@
 </p>
 
 <p>
-  <strong>Image:</strong>
-  <%= @issue.image %>
+  <strong>改善前:</strong><br>
+      <% if @issue.image?%>
+        <%= image_tag @issue.image.url, size: "120x120" %>
+    <% else%>
+        <%= image_tag "default.jpeg", size: "120x120" %>
+    <%end%>
+</p>
+
+<p>
+  <strong>改善後:</strong><br>
+      <% if @issue.image?%>
+        <%= image_tag @issue.image.url, size: "120x120" %>
+    <% else%>
+        <%= image_tag "default.jpeg", size: "120x120" %>
+    <%end%>
 </p>
 
 <p>

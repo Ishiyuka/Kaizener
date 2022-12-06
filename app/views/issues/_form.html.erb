@@ -27,8 +27,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
+  <%= form.label :image ,"改善前" %>
+  <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+  <%= form.label :image, "改善後" %>
+  <%= form.file_field :image %>
   </div>
 
   <div class="field">
