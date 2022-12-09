@@ -25,5 +25,5 @@
   <%= @plan.feedback %>
 </p>
 
-<%= link_to 'Edit', edit_plan_path(@plan) %> |
-<%= link_to 'Back', plans_path %>
+<%= link_to 'Edit', edit_team_issue_plan_path(@team, @issue, @plan) %> |
+<%= link_to 'Back', team_issue_plans_path(@team, @issue) %>

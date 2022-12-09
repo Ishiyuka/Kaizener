@@ -119,6 +119,7 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      back: 戻る
   number:
     currency:
       format:

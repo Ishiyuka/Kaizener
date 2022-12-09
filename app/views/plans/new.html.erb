@@ -1,5 +1,46 @@
 <h1>New Plan</h1>
 
-<%= render 'form', plan: @plan %>
+<%= form_with model: [@team, @issue, @plan], local: true do |form| %>
+  <% if @plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
 
-<%= link_to 'Back', plans_path %>
+      <ul>
+        <% @plan.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :action %>
+    <%= form.text_area :action %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pic %>
+    <%= form.collection_select(:pic, @team.members, :id, :name, include_blank: '選択') %>
+  </div>
+
+  <div class="field">
+    <%= form.label :due_date_at %>
+    <%= form.date_field :due_date_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :feedback %>
+    <%= form.number_field :feedback %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', team_issue_path(@team, @issue) %>

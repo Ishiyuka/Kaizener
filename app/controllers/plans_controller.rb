@@ -1,19 +1,26 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: %i[ show edit update destroy ]
+  before_action :set_plan, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  before_action :set_teams, only: %i[new create edit update]
+  before_action :set_issues, only: %i[new create edit update]
+  # before_action :set_users, only: %i[new create edit update]
 
   # GET /plans or /plans.json
   def index
+    @issues = Issue.all
     @plans = Plan.all
   end
 
   # GET /plans/1 or /plans/1.json
   def show
+    @team = Team.find(@plan.team.id)
+    @issue = Issue.find(@plan.issue.id)
   end
 
   # GET /plans/new
   def new
-    @plan = Plan.new
+    @plan = Plan.new(plan_params)
+    @plan.issue_id = current_issue.id
   end
 
   # GET /plans/1/edit
@@ -22,40 +29,30 @@ class PlansController < ApplicationController
 
   # POST /plans or /plans.json
   def create
-    @plan = Plan.new(plan_params)
-
-    respond_to do |format|
-      if @plan.save
-        format.html { redirect_to plan_url(@plan), notice: "Plan was successfully created." }
-        format.json { render :show, status: :created, location: @plan }
+    # issue = Issue.find(params[:issue_id])
+    plan = @issue.plans.build(plan_params)
+    plan.user = current_user
+    # plan.team_id = issue.team_id
+      if plan.save
+        redirect_to team_issue_plan_path(@team, @issue, plan), notice: "action planを作成しました"
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
+        render new, notice: "保存できませんでした"
       end
-    end
   end
 
   # PATCH/PUT /plans/1 or /plans/1.json
   def update
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to plan_url(@plan), notice: "Plan was successfully updated." }
-        format.json { render :show, status: :ok, location: @plan }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
+    if @plan.update(plan_params)
+      redirect_to @plan, notice: "action planを更新しました"
+    else
+      render :edit, notice: "更新できませんでした"
     end
   end
 
   # DELETE /plans/1 or /plans/1.json
   def destroy
     @plan.destroy
-
-    respond_to do |format|
-      format.html { redirect_to plans_url, notice: "Plan was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to plan_path(plan)
   end
 
   private
@@ -68,4 +65,16 @@ class PlansController < ApplicationController
     def plan_params
       params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback)
     end
+
+    def set_teams
+      @team = Team.find(params[:team_id])
+    end
+
+    def set_issues
+      @issue = Issue.find(params[:issue_id])
+    end
+
+    # def set_users
+    #   @user = User.find(params[:issue_id])
+    # end
 end

@@ -63,5 +63,35 @@
   <%= @issue.done_flag %>
 </p>
 
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
+<hr style="height: 1px; width: 100%;">
+<% @issue.plans.each.with_index(1) do |plan, i| %>
+<h3>改善案<%= "#{i}" %></h3>
+<p>
+  <strong>Action:</strong>
+  <%= plan.action %>
+</p>
+
+<p>
+  <strong>Pic:</strong>
+  <%= plan.pic %>
+</p>
+
+<p>
+  <strong>Due date at:</strong>
+  <%= plan.due_date_at %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= plan.status %>
+</p>
+
+<p>
+  <strong>Feedback:</strong>
+  <%= plan.feedback %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', edit_team_issue_path(@team, @issue) %> |
+<%= link_to 'Back', team_issues_path(@team) %> |
+<%= link_to 'Action Planを作成', new_team_issue_plan_path(team_id: @team, issue_id: @issue) %>

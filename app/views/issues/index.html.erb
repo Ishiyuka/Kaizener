@@ -40,8 +40,8 @@
           <td><%= issue.due_date_at %></td>
           <td><%= issue.priority %></td>
           <td><%= issue.status %></td>
-          <td><%= link_to 'Show', issue %></td>
-          <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
+          <td><%= link_to 'Show', team_issue_path(issue.id, team_id: issue.team.id) %></td>
+          <td><%= link_to 'Edit', edit_issue_path(issue.id, team_id: issue.team.id) %></td>
           <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -50,4 +50,4 @@
 
 <br>
 
-<%= link_to 'New Issue', new_issue_path %>
+<%= link_to 'New Issue', new_team_issue_path(@team) %>

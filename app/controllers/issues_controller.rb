@@ -7,6 +7,7 @@ class IssuesController < ApplicationController
   # GET /issues or /issues.json
   def index
     @issues = @issue_q.result.order(:due_date_at)
+    @plans = Plan.all
   end
 
   def search
@@ -15,22 +16,26 @@ class IssuesController < ApplicationController
 
   # GET /issues/1 or /issues/1.json
   def show
+    @team = Team.find(@issue.team.id)
   end
 
   # GET /issues/new
   def new
     @issue = Issue.new
+    @issue.plans.build
+    @plan = Plan.new
   end
 
   # GET /issues/1/edit
   def edit
+    @issue.plans.build
   end
 
   # POST /issues or /issues.json
   def create
     @issue = current_user.issues.build(issue_params)
     @issue.team_id = params[:issue][:team_id]
-    if @issue.save
+    if current_user.save && @issue.save
       redirect_to issues_path(params[:issue][:team_id]), notice: "課題追加しました！"
     else
       render :new
@@ -49,10 +54,11 @@ class IssuesController < ApplicationController
 
   # DELETE /issues/1 or /issues/1.json
   def destroy
-    @issue.destroy
-
-    respond_to do |format|
-      format.html { redirect_to issues_url, notice: "Issue was successfully destroyed." }
+    if current_user.id == @issue.user_id
+      @issue.destroy
+      redirect_to issues_path(params[:issue][:team_id]), notice:"削除しました"
+    else
+      redirect_to issues_path(params[:issue][:team_id]), notice: "権限なしのため削除できません。"
     end
   end
 
@@ -64,7 +70,8 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:title, :detail, :image, :image_cache, :cause, :goal, :gap, :due_date_at, :priority, :status, :done_flag)
+      params.require(:issue).permit(:title, :detail, :image, :image_cache, :cause, :goal, :gap, :due_date_at, :priority, :status, :done_flag,
+                                    plans_attributes: %i[action pic due_date_at status feedback])
     end
 
     def set_q
@@ -72,7 +79,7 @@ class IssuesController < ApplicationController
     end
 
     def set_teams
-      @teams = Team.all
+      @team = Team.find(params[:team_id])
     end
 
 end

@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      team: タスク
+      issue: 課題
+      plan: 改善案
+    attributes:
+      team:
+        name: チーム名
+      issue:
+        title: 題目
+        detail: 詳細
+        image: 写真
+        cause: 原因
+        goal: 目標
+        gap: ギャップ
+        due_date_at: 期日
+        priority: 優先度
+        status: 状況
+        done_flag: 完了フラグ
+      plan:
+        action: アクション
+        pic: 担当者
+        due_date_at: 期日
+        status: ステータス
+        feedback: 評価

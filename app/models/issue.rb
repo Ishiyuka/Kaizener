@@ -5,4 +5,5 @@ class Issue < ApplicationRecord
   enum status:{未完了: 0, 進行中: 1, 完了: 2 }
   enum priority:{高: 0, 中: 1, 低: 2 }
   mount_uploader :image, ImageUploader
+  accepts_nested_attributes_for :plans, allow_destroy: true, reject_if: :all_blank
 end
