@@ -26,6 +26,7 @@ class PlansController < ApplicationController
 
   # GET /plans/1/edit
   def edit
+    @plan = @issue.plans.build
   end
 
   # POST /plans or /plans.json

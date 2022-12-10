@@ -1,6 +1,5 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
-  before_action :set_issue, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
   # GET /teams or /teams.json
@@ -12,6 +11,7 @@ class TeamsController < ApplicationController
   def show
     @assing = current_user.assigns.find_by(team_id: @team.id)
     @assings = @team.members
+    @issues = @team.issues
   end
 
   # GET /teams/new
@@ -27,6 +27,10 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
+      @assign = Assign.new
+      @assign.user_id = current_user.id
+      @assign.team_id = @team.id
+      @assign.save
       redirect_to teams_path(current_user), notice: "チームを作成しました"
     else
       render 'new',notice: "作成出来ませんでした"
@@ -52,10 +56,6 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
-    end
-
-    def set_issue
-      @issue = Issue.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

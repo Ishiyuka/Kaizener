@@ -23,8 +23,9 @@ class IssuesController < ApplicationController
 
   # GET /issues/new
   def new
-    @issue = Issue.new
     # @team = Team.find(@issue.team.id)
+    @team = Team.find(params[:team_id])
+    @issue = Issue.new
     @team = @issue.team
     @plan = @issue.plans.build
   end
