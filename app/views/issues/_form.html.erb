@@ -1,10 +1,10 @@
-<%= form_with(model: [@team, @issue]) do |form| %>
-  <% if issue.errors.any? %>
+<%= form_with(model: [@team,@issue]) do |form| %>
+  <% if @issue.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
 
       <ul>
-        <% issue.errors.each do |error| %>
+        <% @issue.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :team %>
-    <%= form.collection_select(:team_id, @team.members, :id, :name, include_blank: "選択して下さい" )  %>
+    <%= form.label :name, "チーム名" %>
+    <%= form.collection_select(:name, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
   </div>
 
   <div class="field">
@@ -71,41 +71,29 @@
     <%= form.check_box :done_flag %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= form.hidden_field :user_id, value: current_user.id%>
+  <%# <%= form.hidden_field :team_id, value: current_user.team_id%> %>
+
 <hr style="height: 1px; width: 100%;">
 
-  <%= form.fields_for :plans do | g | %>
-  <h3><strong>改善案<%= @issue.plans.index+1 %></strong></h3>
+  <div id='plan_field'>
+    <%= form.fields_for :plans do |plan| %>
+    <%= render 'plan_fields', f: plan %>
+    <% end %>
+    <%= form.hidden_field :user_id, value: current_user.id%>
 
-    <div class="field">
-      <%= g.label :action %>
-      <%= g.text_area :action %>
+    <div id='links'>
+    <%= link_to_add_association '+アクションプランを追加',form, :plans, 
+        class: 'add_fields', id: 'add-btn',
+        data: {
+        association_insertion_node: '#detail-association-insertion-point', 
+        association_insertion_method: 'after'
+        } %>
     </div>
-
-    <div class="field">
-      <%= g.label :pic %>
-      <%= g.collection_select(:pic, @team.members, :id, :name, include_blank: '選択') %>
+    <div id="detail-association-insertion-point"></div>
+    <div class="actions">
+      <%= form.submit %>
     </div>
-
-    <div class="field">
-      <%= g.label :due_date_at %>
-      <%= g.date_field :due_date_at %>
-    </div>
-
-    <div class="field">
-      <%= g.label :status %>
-      <%= g.number_field :status %>
-    </div>
-
-    <div class="field">
-      <%= g.label :feedback %>
-      <%= g.number_field :feedback %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>
+

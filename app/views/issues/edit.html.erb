@@ -2,5 +2,5 @@
 
 <%= render 'form', issue: @issue %>
 
-<%= link_to 'Show', @issue %> |
+<%= link_to 'Show', team_issue_path(@team, @issue) %> |
 <%= link_to 'Back', team_issues_path(@team, @issue) %>

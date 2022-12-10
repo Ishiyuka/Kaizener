@@ -6,6 +6,7 @@ class IssuesController < ApplicationController
 
   # GET /issues or /issues.json
   def index
+    @issues = Issue.all
     @issues = @issue_q.result.order(:due_date_at)
     @plans = Plan.all
   end
@@ -17,13 +18,14 @@ class IssuesController < ApplicationController
   # GET /issues/1 or /issues/1.json
   def show
     @team = Team.find(@issue.team.id)
+    @plans = @issue.plans
   end
 
   # GET /issues/new
   def new
     @issue = Issue.new
-    @issue.plans.build
-    @plan = Plan.new
+    # @team = @issue.team
+    @plan = @issue.plans.build
   end
 
   # GET /issues/1/edit
@@ -33,10 +35,12 @@ class IssuesController < ApplicationController
 
   # POST /issues or /issues.json
   def create
-    @issue = current_user.issues.build(issue_params)
-    @issue.team_id = params[:issue][:team_id]
+    @issue = Issue.new(issue_params)
+    # @issue = current_user.issues.build(issue_params)
+    @issue.team = Team.find(params[:team_id])
+    # @issue.team_id = params[:issue][:team_id]
     if current_user.save && @issue.save
-      redirect_to issues_path(params[:issue][:team_id]), notice: "課題追加しました！"
+      redirect_to team_issue_plans_path(params[:issue][:team_id]), notice: "課題追加しました！"
     else
       render :new
     end
@@ -44,9 +48,10 @@ class IssuesController < ApplicationController
 
   # PATCH/PUT /issues/1 or /issues/1.json
   def update
+    @issue = current_user.issues.build(issue_params)
     @issue.user_id = current_user.id
     if @issue.update(issue_params)
-      redirect_to issues_path(params[:issue][:team_id]), notice:"更新しました"
+      redirect_to team_issue_plans_path(params[:issue][:team_id]), notice:"更新しました"
     else
       render :edit
     end
@@ -71,7 +76,7 @@ class IssuesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def issue_params
       params.require(:issue).permit(:title, :detail, :image, :image_cache, :cause, :goal, :gap, :due_date_at, :priority, :status, :done_flag,
-                                    plans_attributes: %i[action pic due_date_at status feedback])
+                                    plans_attributes: %i[id action pic due_date_at status feedback _destroy])
     end
 
     def set_q

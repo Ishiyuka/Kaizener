@@ -16,4 +16,7 @@ class AssignsController < ApplicationController
     redirect_to teams_path, notice: "#{assign.team.name}から外れました"
   end
 
+  def find_team(team_id)
+    Team.find(params[:team_id])
+  end
 end

@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1 or /teams/1.json
   def show
     @assing = current_user.assigns.find_by(team_id: @team.id)
-    @assings = @team.assign_users
+    @assings = @team.members
   end
 
   # GET /teams/new

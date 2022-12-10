@@ -20,7 +20,6 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new(plan_params)
-    @plan.issue_id = current_issue.id
   end
 
   # GET /plans/1/edit

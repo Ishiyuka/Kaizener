@@ -1,12 +1,12 @@
 <h1>Issues</h1>
 
-<%= search_form_for @issue_q, url: search_issues_path do |f| %>
+<%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
   <%= f.label :title_cont, '課題名' %>
   <%= f.search_field :title_cont %>
   <%= f.submit '検索' %>
 <% end %>
 
-<%= search_form_for @issue_q, url: search_issues_path do |f| %>
+<%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
   <%= f.label :status, '進捗:' %>
   <%= f.radio_button :status_eq, '0' %>未完了
   <%= f.radio_button :status_eq, '1' %>進行中
@@ -41,8 +41,8 @@
           <td><%= issue.priority %></td>
           <td><%= issue.status %></td>
           <td><%= link_to 'Show', team_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to 'Edit', edit_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
+          <td><%= link_to 'Destroy', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -50,4 +50,4 @@
 
 <br>
 
-<%= link_to 'New Issue', new_team_issue_path(@team) %>
+<%= link_to 'New Issue', new_team_issue_path(team_id: current_user.assign_teams) %>
