@@ -19,7 +19,9 @@ class PlansController < ApplicationController
 
   # GET /plans/new
   def new
-    @plan = Plan.new(plan_params)
+    @issue = Issue.find(params[:issue_id])
+    @team = @issue.team
+    @plan = @issue.plans.build
   end
 
   # GET /plans/1/edit
@@ -28,11 +30,11 @@ class PlansController < ApplicationController
 
   # POST /plans or /plans.json
   def create
-    # issue = Issue.find(params[:issue_id])
-    plan = @issue.plans.build(plan_params)
-    plan.user = current_user
-    # plan.team_id = issue.team_id
-      if plan.save
+    @issue = Issue.find(params[:issue_id])
+    @plan = issue.plans.build(plan_params)
+    @plan.user = current_user
+    @plan.team_id = issue.team_id
+      if @plan.save
         redirect_to team_issue_plan_path(@team, @issue, plan), notice: "action planを作成しました"
       else
         render new, notice: "保存できませんでした"

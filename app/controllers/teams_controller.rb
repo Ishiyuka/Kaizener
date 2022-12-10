@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :set_issue, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
   # GET /teams or /teams.json
@@ -51,6 +52,10 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    def set_issue
+      @issue = Issue.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

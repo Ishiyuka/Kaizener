@@ -1,6 +1,6 @@
 <h1>New Issue</h1>
 
-<%= form_with(model: [@team,@issue],url: {controller: 'issues', action: 'new' }  ) do |form| %>
+<%= form_with(model: [@team,@issue],url: team_issues_path  ) do |form| %>
   <% if @issue.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
