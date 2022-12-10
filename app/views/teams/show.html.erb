@@ -62,12 +62,13 @@
   </div>
 </div>
 
-
+<% unless @teams.user_id == current_user.id %>
   <% if @assign.present? %>
     <%= link_to 'チームから外れる', team_assign_path(id: @assign.id), method: :delete, class: 'btn btn-danger' %>
   <% else %>
     <%= link_to 'チームに加わる', team_assigns_path(team_id: @team.id), method: :post, class: 'btn btn-primary' %>
   <% end %>
+<% end %>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

@@ -6,7 +6,7 @@ class AssignsController < ApplicationController
   end
 
   def create
-    team = find_team(params[:team_id])
+    # team = find_team(params[:team_id])
     assign = current_user.assigns.create(team_id: params[:team_id])
     redirect_to teams_path, notice: "#{assign.team.name}に加わりました"
   end
