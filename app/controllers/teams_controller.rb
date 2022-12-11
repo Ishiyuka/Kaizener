@@ -26,12 +26,10 @@ class TeamsController < ApplicationController
   # POST /teams or /teams.json
   def create
     @team = Team.new(team_params)
+    @team.owner = current_user
     if @team.save
-      @assign = Assign.new
-      @assign.user_id = current_user.id
-      @assign.team_id = @team.id
-      @assign.save
-      redirect_to teams_path(current_user), notice: "チームを作成しました"
+      @team.invite_member(@team.owner)
+      redirect_to teams_path(params[:team_id]), notice: "チームを作成しました"
     else
       render 'new',notice: "作成出来ませんでした"
     end
@@ -49,7 +47,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1 or /teams/1.json
   def destroy
     @team.destroy
-    redirect_to teams_path(params[:team_id])
+    redirect_to teams_path(params[:team_id]), notice: "チーム削除しました"
   end
 
   private
@@ -60,6 +58,6 @@ class TeamsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :owner_id)
     end
 end

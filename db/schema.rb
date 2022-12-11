@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2022_12_10_084755) do
     t.text "gap", null: false
     t.date "due_date_at", null: false
     t.integer "priority", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.boolean "done_flag", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2022_12_10_084755) do
     t.text "action", null: false
     t.string "pic", null: false
     t.date "due_date_at", null: false
-    t.integer "status", null: false
+    t.integer "status", default: 0, null: false
     t.integer "feedback", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -61,8 +61,10 @@ ActiveRecord::Schema.define(version: 2022_12_10_084755) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_teams_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -93,4 +95,5 @@ ActiveRecord::Schema.define(version: 2022_12_10_084755) do
   add_foreign_key "plans", "issues"
   add_foreign_key "plans", "teams"
   add_foreign_key "plans", "users"
+  add_foreign_key "teams", "users", column: "owner_id"
 end

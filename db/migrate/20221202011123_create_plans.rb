@@ -4,7 +4,7 @@ class CreatePlans < ActiveRecord::Migration[6.1]
       t.text :action, null: false
       t.string :pic, null: false
       t.date :due_date_at, null: false
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
       t.integer :feedback, null: false
 
       t.timestamps
