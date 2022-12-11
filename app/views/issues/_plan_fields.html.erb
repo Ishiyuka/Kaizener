@@ -1,11 +1,13 @@
 <div class="nested-fields">
   <div class="row mx-auto">
     <div class="col-5">
-      <%= f.hidden_field :id %>
-      <%= f.hidden_field :team_id %>
+
       <% index = 0 %>
       <h3><strong>改善案<%= "#{index+1}" %></strong></h3>
         <%= f.hidden_field :id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :team_id, value: @team.id %>
+
 
         <div class="field">
           <%= f.label :action %>
