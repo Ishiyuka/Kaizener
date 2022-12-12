@@ -28,7 +28,7 @@ https://docs.google.com/spreadsheets/d/14Egh7F4bJAEscsrHyR00C-VTOc5TkQwsGOf9Uugv
 https://www.figma.com/file/kgs1eJRMXOIG3nyHswIlMY/Kaizen-app%E3%81%AE%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0?node-id=23%3A1016&t=yLXc41Np1FWMBiEr-1
 
 ## ER図
-![E6400C0A-C89D-4D82-B2A1-E96DAFDCE203](https://user-images.githubusercontent.com/112865440/203728581-b4f761bb-266a-4baf-a947-f5fb7adf6c5d.jpeg)
+![B44111C6-EB62-4D2F-9A5F-2908E3149346](https://user-images.githubusercontent.com/112865440/206980202-6f1d066e-7779-424d-b715-7232010f8735.jpeg)
 
 ## 画面遷移図
 ![32264B7A-A881-4925-A876-846790CDC7E9](https://user-images.githubusercontent.com/112865440/203374715-50ee03cc-343b-41e0-8ae7-5ccb01ab76fd.jpeg)
