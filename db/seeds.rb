@@ -24,6 +24,28 @@
 # )
 
 
-  Team.create!(name: "team1",
-              owner_id: 1
+  # Team.create!(name: "team1",
+  #             owner_id: 1
+  #             )
+
+5.times do |n|
+  Issue.create!(title: "課題#{n + 1}",
+                goal: "ゴール#{n + 1}",
+                gap: "ギャップ#{n + 1}",
+                due_date_at: "2022/12/13",
+                priority: 0,
+                status: 0,
+                done_flag: false,
+                user_id: 1,
+                team_id: 1,
               )
+  Plan.create!(action: "アクション#{n + 1}",
+                pic: 1,
+                due_date_at: "2022/12/13",
+                status: 0,
+                feedback: 0,
+                user_id: 1,
+                issue_id: 1,
+                team_id: 1,
+              )
+end
