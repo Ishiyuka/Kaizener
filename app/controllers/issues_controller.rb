@@ -48,7 +48,7 @@ class IssuesController < ApplicationController
 
   # PATCH/PUT /issues/1 or /issues/1.json
   def update
-    @issue = current_user.issues.build(issue_params)
+    # @issue = current_user.issues.build(issue_params)
     @issue.user_id = current_user.id
     if @issue.update(issue_params)
       redirect_to team_issue_path(params[:issue][:team_id]), notice:"更新しました"
@@ -89,7 +89,7 @@ class IssuesController < ApplicationController
                                     :id, 
                                     :user_id, 
                                     :team_id,
-                                    team: %i[name owner_id],
+                                    teams: %i[name owner_id],
                                     plans_attributes: %i[id user_id team_id action pic due_date_at status feedback _destroy])
     end
 

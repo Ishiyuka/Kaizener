@@ -5,6 +5,11 @@ class TeamsController < ApplicationController
   # GET /teams or /teams.json
   def index
     @teams = Team.all
+    if params[:my_team]
+      @teams = current_user.assign_teams
+    else
+      @teams = Team.all
+    end
   end
 
   # GET /teams/1 or /teams/1.json

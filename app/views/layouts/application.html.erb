@@ -13,8 +13,10 @@
   <body>
     <% if user_signed_in? %>
       <%= link_to "#{current_user.name}の詳細ページ", user_path(current_user)%>
+      <%= link_to 'すべてのチーム一覧', teams_path %>
+      <%= link_to '参加チーム一覧', teams_path(my_team: "true") %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-        <%= link_to "管理画面", rails_admin_path if current_user.try(:admin?) %>
+      <%= link_to "管理画面", rails_admin_path if current_user.try(:admin?) %>
     <% else %>
       <%= link_to 'ログイン', new_user_session_path %>
       <%= link_to 'サインアップ', new_user_registration_path %>

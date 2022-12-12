@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @issue.title %>
@@ -73,7 +71,7 @@
 
 <p>
   <strong>Pic:</strong>
-  <%= plan.pic %>
+  <%= User.find(plan.pic).name %>
 </p>
 
 <p>

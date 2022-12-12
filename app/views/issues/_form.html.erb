@@ -12,8 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name, "チーム名" %>
-    <%= form.collection_select(:name, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
+    <%= form.hidden_field :team_id, value: @team.id%>
+    <%= form.label :team_name, "チーム名" %>
+    <%= form.collection_select(:team_id, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
   </div>
 
   <div class="field">
@@ -72,7 +73,6 @@
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id%>
-  <%# <%= form.hidden_field :team_id, value: current_user.team_id %> %>
 
 <hr style="height: 1px; width: 100%;">
 

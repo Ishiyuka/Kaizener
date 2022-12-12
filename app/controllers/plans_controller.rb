@@ -65,7 +65,7 @@ class PlansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plan_params
-      params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback)
+      params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback,teams: %i[name owner_id])
     end
 
     def set_teams
