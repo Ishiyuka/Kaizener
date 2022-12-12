@@ -87,3 +87,6 @@ gem 'mini_magick'
 
 gem 'jquery-rails'
 gem 'cocoon'
+
+# cron
+gem 'whenever', require: false
