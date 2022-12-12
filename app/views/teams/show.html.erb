@@ -1,33 +1,78 @@
-<p id="notice"><%= notice %></p>
+<div class="main-content">
+  <h1><%= @team.name %> の詳細</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
-
-<p>
-  <strong>Team ID:</strong>
-  <%= @team.id %>
-</p>
-
-<table class="table">
-  <tbody>
-    <% @team.assigns.each do |assign| %>
-      <tr>
-        <td><%= assign.user.email %></td>
-        <td><%= link_to "削除", assign_path, method: :delete, class: 'btn btn-sm btn-danger' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-  <% if @assign.present? %>
-    <%= link_to 'チームから外す', assign_path(id: @assign.id), method: :delete, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to 'チームに加える', assigns_path(team_id: @team.id), method: :post, class: 'btn btn-primary' %>
+<div>
+  <h5>チームメンバーを招待する</h5>
+  <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), local: true do |form| %>
+    <div class="input-group input-group-sm">
+      <%= text_field_tag :email, '', { class: 'form-control', placeholder: "招待したい方のメールアドレスを入力してください" } %>
+      <span class="input-group-append">
+        <button type="submit" class="btn btn-info btn-flat">招待</button>
+      </span>
+    </div>
   <% end %>
+</div>
+
+<div class="btn-cover">
+  <div class="user-show">
+    <table class="team-table">
+          <h3>チームメンバー</h3>
+      <thead>
+        <tr>
+          <th>名前</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% @assings.each do |assign| %>
+            <tr>
+              <td><%= assign.name %></td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+<div class="btn-cover">
+  <div class="user-show">
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Team</th>
+          <th>Title</th>
+          <th>期限日</th>
+          <th>優先度</th>
+          <th>進捗</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @issues.each do |issue| %>
+          <tr>
+            <% if issue.done_flag == true %>
+              <td> 完了 </td>
+            <% else %>
+              <td>未完了</td>
+            <% end %>
+              <td><%= issue.team.name %></td>
+              <td><%= issue.title %></td>
+              <td><%= issue.due_date_at %></td>
+              <td><%= issue.priority %></td>
+              <td><%= issue.status %></td>
+              <td><%= link_to 'Show', team_issue_path(issue.id, team_id: issue.team.id) %></td>
+              <td><%= link_to 'Edit', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
+              <td><%= link_to 'Destroy', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>
-<%= link_to '課題一覧', issues_path %>
+<%= link_to '課題一覧', team_issues_path(@team, @issue) %>

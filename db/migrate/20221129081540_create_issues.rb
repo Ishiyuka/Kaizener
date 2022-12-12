@@ -9,7 +9,7 @@ class CreateIssues < ActiveRecord::Migration[6.1]
       t.text :gap, null: false
       t.date :due_date_at, null: false
       t.integer :priority, null: false
-      t.integer :status, null: false
+      t.integer :status, null: false, default: 0
       t.boolean :done_flag, null: false, default: false
 
       t.timestamps

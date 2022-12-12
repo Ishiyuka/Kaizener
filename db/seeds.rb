@@ -23,7 +23,7 @@
 #   password_confirmation: 'password',
 # )
 
-5.times do |n|
-  Team.create!(name: "team#{n + 1}",
+
+  Team.create!(name: "team1",
+              owner_id: 1
               )
-end

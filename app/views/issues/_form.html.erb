@@ -1,10 +1,10 @@
-<%= form_with(model: issue) do |form| %>
-  <% if issue.errors.any? %>
+<%= form_with(model: [@team,@issue]) do |form| %>
+  <% if @issue.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
 
       <ul>
-        <% issue.errors.each do |error| %>
+        <% @issue.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :team %>
-    <%= form.collection_select(:team_id, @teams, :id, :name, include_blank: "選択して下さい" )  %>
+    <%= form.hidden_field :team_id, value: @team.id%>
+    <%= form.label :team_name, "チーム名" %>
+    <%= form.collection_select(:team_id, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
   </div>
 
   <div class="field">
@@ -71,7 +72,28 @@
     <%= form.check_box :done_flag %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <%= form.hidden_field :user_id, value: current_user.id%>
+
+<hr style="height: 1px; width: 100%;">
+
+  <div id='plan_field'>
+    <%= form.fields_for :plans do |plan| %>
+    <%= render 'plan_fields', f: plan %>
+    <% end %>
+    <%= form.hidden_field :user_id, value: current_user.id%>
+
+    <div id='links'>
+    <%= link_to_add_association '+アクションプランを追加',form, :plans, 
+        class: 'add_fields', id: 'add-btn',
+        data: {
+        association_insertion_node: '#detail-association-insertion-point', 
+        association_insertion_method: 'after'
+        } %>
+    </div>
+    <div id="detail-association-insertion-point"></div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>
+
