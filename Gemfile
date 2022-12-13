@@ -90,3 +90,6 @@ gem 'cocoon'
 
 # cron
 gem 'whenever', require: false
+
+# グラフ
+gem 'chartkick'
