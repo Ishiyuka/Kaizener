@@ -57,6 +57,17 @@ class PlansController < ApplicationController
     redirect_to plan_path(plan)
   end
 
+  def expired_action?
+    now = Date.current
+    @target = now.since(2.days)
+    @plans = Plan.all
+      if @plans.status == ( '未完了' || '進行中') && (@plans.due_date_at - now).to_i < 2
+        true
+      else
+        false
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
