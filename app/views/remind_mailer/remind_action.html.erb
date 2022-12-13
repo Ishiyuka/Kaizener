@@ -1,17 +1,24 @@
 <h1>期限が近づいているのお知らせ</h1>
 <h3>~アクションを起こしましょう~</h3>
-
+<%= "#{@plan.user.name}様"%>
 <strong>期限が2日以内に迫っているアクション一覧です。</strong>
-<br />
-<hr />
-<% @team.plans.each do |plan| %>
-  <% if plan.status == (0 || 1) && (plan.due_date_at - @today).to_i < 2 %>
-  <ul>
-    <li>
-      チーム名：<strong><%= @team.name %></strong> |
-      タスク名：<strong><%= @team.plans.action %></strong> |
-      期限：<strong><%= plan.due_date_at %></strong>
-    </li>
-  </ul>
-  <% end %>
-<% end %>
+
+
+<table class="table">
+  <tr>
+    <th>アクション:</th>
+    <td><%= @plan.action %></td>
+  </tr>
+  <tr>
+    <th>担当者:</th>
+    <td><%= @plan.pic %></td>
+  </tr>
+  <tr>
+    <th>期限日:</th>
+    <td><%= @plan.due_date_at.strftime("%Y年%m月%d日 %H:%M") %> </td>
+  </tr>
+  <tr>
+    <th>進捗: </th>
+    <td><%= @plan.status %></td>
+  </tr>
+  </table>

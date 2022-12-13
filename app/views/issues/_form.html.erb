@@ -12,7 +12,6 @@
   <% end %>
 
   <div class="field">
-    <%= form.hidden_field :team_id, value: @team.id%>
     <%= form.label :team_name, "チーム名" %>
     <%= form.collection_select(:team_id, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
   </div>
