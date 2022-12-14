@@ -17,6 +17,9 @@ class TeamsController < ApplicationController
     @assing = current_user.assigns.find_by(team_id: @team.id)
     @assings = @team.members
     @issues = @team.issues
+    @plans = @team.plans
+    data = @team.plans.group(:pic).count
+    @data = data.transform_keys!{|k| User.find(k).name }
   end
 
   # GET /teams/new

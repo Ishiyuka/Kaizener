@@ -1,5 +1,6 @@
 <div class="main-content">
   <h1><%= @team.name %> の詳細</h1>
+  <p><strong>リーダー: <%= @team.owner.name %></strong></p>
 
 <div>
   <h5>チームメンバーを招待する</h5>
@@ -71,6 +72,18 @@
   </div>
 </div>
 
+    <table>
+      <thead>
+        <tr>
+          <th> 担当者ごとのアクション数</th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td><%= column_chart @data, id: "column-chart", width: "200px", height: "200px"%></td>
+          </tr>
+        </tbody>
+    </table>
 
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
