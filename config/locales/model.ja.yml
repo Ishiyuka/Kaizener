@@ -8,6 +8,7 @@ ja:
     attributes:
       team:
         name: チーム名
+        owner_id: リーダーid
       issue:
         title: 題目
         detail: 詳細

@@ -1,9 +1,10 @@
-<h1>Teams</h1>
+<h1><%= t('.display') %></h1>
+
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th><%= t('.name') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +13,11 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><%= link_to 'Show', team %></td>
-        <td><%= link_to 'Edit', edit_team_path(team) %></td>
-        <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', team %></td>
+        <% if current_user.id = @owner_id %>
+          <td><%= link_to '編集', edit_team_path(team) %></td>
+          <td><%= link_to '削除', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Team', new_team_path %>
+<%= link_to '新たにチームを作成する', new_team_path %>

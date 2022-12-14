@@ -1,10 +1,10 @@
 <p>
-  <strong>Title:</strong>
+  <strong>課題の題目:</strong>
   <%= @issue.title %>
 </p>
 
 <p>
-  <strong>Detail:</strong>
+  <strong>詳細:</strong>
   <%= @issue.detail %>
 </p>
 
@@ -27,37 +27,37 @@
 </p>
 
 <p>
-  <strong>Cause:</strong>
+  <strong>原因:</strong>
   <%= @issue.cause %>
 </p>
 
 <p>
-  <strong>Goal:</strong>
+  <strong>目標:</strong>
   <%= @issue.goal %>
 </p>
 
 <p>
-  <strong>Gap:</strong>
+  <strong>ギャップ:</strong>
   <%= @issue.gap %>
 </p>
 
 <p>
-  <strong>Due date at:</strong>
+  <strong>期限:</strong>
   <%= @issue.due_date_at %>
 </p>
 
 <p>
-  <strong>Priority:</strong>
+  <strong>優先度:</strong>
   <%= @issue.priority %>
 </p>
 
 <p>
-  <strong>Status:</strong>
+  <strong>状況:</strong>
   <%= @issue.status %>
 </p>
 
 <p>
-  <strong>Done flag:</strong>
+  <strong>完了？:</strong>
   <%= @issue.done_flag %>
 </p>
 
@@ -65,27 +65,27 @@
 <% @issue.plans.each.with_index(1) do |plan, i| %>
 <h3>改善案<%= "#{i}" %></h3>
 <p>
-  <strong>Action:</strong>
+  <strong>アクション:</strong>
   <%= plan.action %>
 </p>
 
 <p>
-  <strong>Pic:</strong>
+  <strong>担当者:</strong>
   <%= User.find(plan.pic).name %>
 </p>
 
 <p>
-  <strong>Due date at:</strong>
+  <strong>アクションの期限:</strong>
   <%= plan.due_date_at %>
 </p>
 
 <p>
-  <strong>Status:</strong>
+  <strong>アクションの状況:</strong>
   <%= plan.status %>
 </p>
 
 <p>
-  <strong>Feedback:</strong>
+  <strong>評価:</strong>
   <%= plan.feedback %>
 </p>
 <% end %>

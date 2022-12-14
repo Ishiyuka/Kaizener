@@ -1,5 +1,22 @@
 ---
 ja:
+  issues:
+      index:
+        display: "課題一覧"
+        title: "タスク"
+        detail: "詳細"
+        image: "プロフィール画像"
+        created_at: "作成日時"
+        updated_at: "更新日時"
+        due_date_at: "期限"
+        status: "ステータス"
+        priority: "優先順位"
+        user_name: "ユーザー名"
+        team_name: "チーム名"
+  teams:
+    index:
+      display: "チーム一覧"
+      name: チーム名
   activerecord:
     errors:
       messages:
@@ -180,3 +197,8 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  link to:
+    edit: 編集
+    show: 詳細
+    destroy: 削除
+    back: 戻る

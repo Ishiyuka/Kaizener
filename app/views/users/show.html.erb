@@ -18,7 +18,7 @@
     <%= @user.department %>
 </p>
 <p>
-    <strong>e-mail</strong>
+    <strong>メールアドレス</strong>
     <%= @user.email %>
 </p>
 
@@ -29,7 +29,9 @@
         <% @user.assign_teams.each do |team| %>
         <tr>
             <td><%= team.name %></td>
-            <td><%= link_to "詳細", team_path(@team) %></td>
+            <td><%= link_to "詳細", team_path(team) %></td>
+            <td><%= link_to '課題一覧', team_issues_path(team) %></td>
+            <td><%= link_to '課題追加', new_team_issue_path(team) %></td>
         </tr>
         <% end %>
     </tbody>
@@ -39,5 +41,3 @@
 <%= link_to "プロフィール編集", edit_user_registration_path %>
 <%= link_to 'すべてのチーム一覧', teams_path %>
 <%= link_to '参加チーム一覧', teams_path(my_team: "true") %>
-<%= link_to '課題一覧', team_issues_path(@team, @issue) %>
-<%= link_to '課題追加', new_team_issue_path(@team) %>
