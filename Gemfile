@@ -93,3 +93,8 @@ gem 'whenever', require: false
 
 # グラフ
 gem 'chartkick'
+
+# herokuへデプロイするため
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
