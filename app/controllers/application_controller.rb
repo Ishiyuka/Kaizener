@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_admin_authorization
+  before_action :authenticate_user!
 
   rescue_from CanCan::AccessDenied do |_exception|
     redirect_to issues_path, alert: '画面を閲覧する権限がありません。'
