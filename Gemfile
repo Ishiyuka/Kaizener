@@ -98,3 +98,8 @@ gem 'chartkick'
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
+
+# AWSへデプロイするため
+gem 'fog-aws'
+
+gem 'dotenv-rails'
