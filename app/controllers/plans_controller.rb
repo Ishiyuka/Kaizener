@@ -1,9 +1,7 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: %i[show edit update destroy]
-  before_action :authenticate_user!
   before_action :set_teams, only: %i[new create edit update]
   before_action :set_issues, only: %i[new create edit update]
-  # before_action :set_users, only: %i[new create edit update]
 
   # GET /plans or /plans.json
   def index
@@ -87,7 +85,4 @@ class PlansController < ApplicationController
       @issue = Issue.find(params[:issue_id])
     end
 
-    # def set_users
-    #   @user = User.find(params[:issue_id])
-    # end
 end

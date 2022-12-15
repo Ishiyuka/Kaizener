@@ -1,5 +1,4 @@
 class AssignsController < ApplicationController
-  before_action :authenticate_user!
 
   def index
     @assigns = current_user.assign_teams.all

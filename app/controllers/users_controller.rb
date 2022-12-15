@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user = current_user
     @team = Team.find(@user.assign_teams.ids)
     # @teams = Team.where(@user.assign_teams)
     @issue = Issue.find(@user.issues.ids)

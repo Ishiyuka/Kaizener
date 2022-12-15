@@ -14,7 +14,7 @@
       <tr>
         <td><%= team.name %></td>
         <td><%= link_to '編集', team %></td>
-        <% if current_user.id = @owner_id %>
+        <% if current_user.id == @owner_id %>
           <td><%= link_to '編集', edit_team_path(team) %></td>
           <td><%= link_to '削除', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>

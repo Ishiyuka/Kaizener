@@ -99,6 +99,8 @@
 </table>
 <% end %>
 
-<%= link_to 'Edit', edit_team_issue_path(@team, @issue) %> |
+<%= link_to edit_team_issue_path(@team, @issue) do %>
+  <i class="bi bi-pen"></i>編集
+<% end %>
 <%= link_to 'Back', team_issues_path(@team) %> |
 <%= link_to 'Action Planを作成', new_team_issue_plan_path(team_id: @team, issue_id: @issue) %>
