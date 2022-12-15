@@ -2,12 +2,13 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      team: タスク
+      team: チーム
       issue: 課題
       plan: 改善案
     attributes:
       team:
         name: チーム名
+        owner_id: リーダーid
       issue:
         title: 題目
         detail: 詳細

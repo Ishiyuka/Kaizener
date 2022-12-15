@@ -1,6 +1,5 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[show edit update destroy]
-  before_action :authenticate_user!
   before_action :set_q, only: %i[index search]
   before_action :set_teams, only: %i[ create edit update]
 

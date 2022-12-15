@@ -45,6 +45,15 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
+
+  # capistranoのツール一式
+  gem 'capistrano', '3.16.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :development do
@@ -93,3 +102,14 @@ gem 'whenever', require: false
 
 # グラフ
 gem 'chartkick'
+
+# herokuへデプロイするため
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+
+# AWSへデプロイするため
+gem 'fog-aws'
+
+gem 'dotenv-rails' # 開発環境で環境変数を操作するのに必要
+gem 'unicorn' # アプリケーションサーバのunicorn

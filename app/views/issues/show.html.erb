@@ -1,95 +1,106 @@
-<p>
-  <strong>Title:</strong>
-  <%= @issue.title %>
-</p>
+<table>
+  <tbody>
+    <tr>
+      <th>改善前:</th>
+      <td>
+        <% if @issue.image?%>
+          <%= image_tag @issue.image.url, size: "120x120" %>
+        <% else%>
+          <%= image_tag "default.jpeg", size: "120x120" %>
+        <%end%>
+      </td>
+    </tr>
 
-<p>
-  <strong>Detail:</strong>
-  <%= @issue.detail %>
-</p>
+    <tr>
+      <th>改善後:</th>
+      <td>
+        <% if @issue.image?%>
+          <%= image_tag @issue.image.url, size: "120x120" %>
+        <% else%>
+          <%= image_tag "default.jpeg", size: "120x120" %>
+        <%end%>
+      </td>
+    </tr>
+  </tbody>
+<table>
 
-<p>
-  <strong>改善前:</strong><br>
-      <% if @issue.image?%>
-        <%= image_tag @issue.image.url, size: "120x120" %>
-    <% else%>
-        <%= image_tag "default.jpeg", size: "120x120" %>
-    <%end%>
-</p>
+<table>
+  <tbody>
+    <tr>
+      <th>課題の題目:</th>
+      <td><%= @issue.title %></td>
+    </tr>
 
-<p>
-  <strong>改善後:</strong><br>
-      <% if @issue.image?%>
-        <%= image_tag @issue.image.url, size: "120x120" %>
-    <% else%>
-        <%= image_tag "default.jpeg", size: "120x120" %>
-    <%end%>
-</p>
+    <tr>
+      <th>詳細:</th>
+      <td><%= @issue.detail %></td>
+    </tr>
 
-<p>
-  <strong>Cause:</strong>
-  <%= @issue.cause %>
-</p>
+    <tr>
+      <th>原因:</th>
+      <td><%= @issue.cause %></td>
+    </tr>
 
-<p>
-  <strong>Goal:</strong>
-  <%= @issue.goal %>
-</p>
+    <tr>
+      <th>目標:</th>
+      <td><%= @issue.goal %></td>
+    </tr>
 
-<p>
-  <strong>Gap:</strong>
-  <%= @issue.gap %>
-</p>
+    <tr>
+      <th>ギャップ:</th>
+      <td><%= @issue.gap %></td>
+    </tr>
 
-<p>
-  <strong>Due date at:</strong>
-  <%= @issue.due_date_at %>
-</p>
+    <tr>
+      <th>期限:</th>
+      <td><%= @issue.due_date_at %></td>
+    </tr>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @issue.priority %>
-</p>
+    <tr>
+      <th>優先度:</th>
+      <td><%= @issue.priority %></td>
+    </tr>
 
-<p>
-  <strong>Status:</strong>
-  <%= @issue.status %>
-</p>
+    <tr>
+      <th>状況:</th>
+      <td><%= @issue.status %></td>
+    </tr>
 
-<p>
-  <strong>Done flag:</strong>
-  <%= @issue.done_flag %>
-</p>
+    <tr>
+      <th>完了？:</th>
+      <td><%= @issue.done_flag %></td>
+    </tr>
+  </tbody>
+<table>
 
 <hr style="height: 1px; width: 100%;">
 <% @issue.plans.each.with_index(1) do |plan, i| %>
 <h3>改善案<%= "#{i}" %></h3>
-<p>
-  <strong>Action:</strong>
-  <%= plan.action %>
-</p>
 
-<p>
-  <strong>Pic:</strong>
-  <%= User.find(plan.pic).name %>
-</p>
-
-<p>
-  <strong>Due date at:</strong>
-  <%= plan.due_date_at %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= plan.status %>
-</p>
-
-<p>
-  <strong>Feedback:</strong>
-  <%= plan.feedback %>
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>アクション:</th>
+      <th>担当者:</th>
+      <th>アクションの期限:</th>
+      <th>アクションの状況:</th>
+      <th>評価:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= plan.action %></td>
+      <td><%= User.find(plan.pic).name %></td>
+      <td><%= plan.due_date_at %></td>
+      <td><%= plan.status %></td>
+      <td><%= plan.feedback %></td>
+    </tr>
+  </tbody>
+</table>
 <% end %>
 
-<%= link_to 'Edit', edit_team_issue_path(@team, @issue) %> |
+<%= link_to edit_team_issue_path(@team, @issue) do %>
+  <i class="bi bi-pen"></i>編集
+<% end %>
 <%= link_to 'Back', team_issues_path(@team) %> |
 <%= link_to 'Action Planを作成', new_team_issue_plan_path(team_id: @team, issue_id: @issue) %>
