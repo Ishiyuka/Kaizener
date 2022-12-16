@@ -6,11 +6,19 @@
 
 ## 就業Termの技術
 - devise
-- Ajaxを使ったコメント機能
+- devise-i18n
+- rails_admin
+- cancancan
+- chartkick
+- carrierwave
+- mini_magick
+- jquery-rails
+- whenever
 
 ## カリキュラム外の技術
 - ransack
 - chartkick
+- cocoon
 
 ## 実行手順
 ```
