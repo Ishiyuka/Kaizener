@@ -120,7 +120,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { host: 'アプリケーションのドメイン名'}
+  config.action_mailer.default_url_options = { host: 'http://54.150.235.247' }
 
   config.action_mailer.perform_deliveries = true
 
