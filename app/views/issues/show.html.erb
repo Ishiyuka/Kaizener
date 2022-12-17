@@ -1,79 +1,62 @@
-<table>
-  <tbody>
-    <tr>
-      <th>改善前:</th>
-      <td>
-        <% if @issue.image?%>
-          <%= image_tag @issue.image.url, size: "120x120" %>
-        <% else%>
-          <%= image_tag ("default.jpeg"), size: "120x120" %>
-        <%end%>
-      </td>
-    </tr>
+<h2>課題一覧</h2>
+<div class="row">
+  <div class="col">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+            <% if @issue.image?%>
+              <%= image_tag @issue.image.url, class: "img-fluid"%>
+            <% else%>
+              <%= image_tag "default.jpeg", class: "img-fluid"%>
+            <%end%>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">改善前
+              <%  if @issue.done_flag %>
+                <span class="badge bg-secondary"><i class="bi bi-flag-fill"></i></span>
+              <% end %>
+            </h5>
+            <p class="card-text">
+              課題の題目:<%= @issue.title %><br>
+              詳細:<%= @issue.detail %><br>
+              原因:<%= @issue.cause %><br>
+              目標:<%= @issue.goal %><br>
+              ギャップ:<%= @issue.gap %><br>
+              期限:<%= @issue.due_date_at %><br>
+              優先度:<%= @issue.priority %><br>
+              状況:<%= @issue.status %><br>
+            </p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <tr>
-      <th>改善後:</th>
-      <td>
-        <% if @issue.image?%>
-          <%= image_tag @issue.image.url, size: "120x120" %>
-        <% else%>
-          <%= image_tag ("default.jpeg"), size: "120x120" %>
-        <%end%>
-      </td>
-    </tr>
-  </tbody>
-<table>
+  </div>
+  <div class="col">
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <% if @issue.image?%>
+            <%= image_tag @issue.image.url, class: "img-fluid" %>
+          <% else%>
+            <%= image_tag "default.jpeg", class: "img-fluid"%>
+          <%end%>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">改善後:</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tbody>
-    <tr>
-      <th>課題の題目:</th>
-      <td><%= @issue.title %></td>
-    </tr>
-
-    <tr>
-      <th>詳細:</th>
-      <td><%= @issue.detail %></td>
-    </tr>
-
-    <tr>
-      <th>原因:</th>
-      <td><%= @issue.cause %></td>
-    </tr>
-
-    <tr>
-      <th>目標:</th>
-      <td><%= @issue.goal %></td>
-    </tr>
-
-    <tr>
-      <th>ギャップ:</th>
-      <td><%= @issue.gap %></td>
-    </tr>
-
-    <tr>
-      <th>期限:</th>
-      <td><%= @issue.due_date_at %></td>
-    </tr>
-
-    <tr>
-      <th>優先度:</th>
-      <td><%= @issue.priority %></td>
-    </tr>
-
-    <tr>
-      <th>状況:</th>
-      <td><%= @issue.status %></td>
-    </tr>
-
-    <tr>
-      <th>完了？:</th>
-      <td><%= @issue.done_flag %></td>
-    </tr>
-  </tbody>
-<table>
-
-<hr style="height: 1px; width: 100%;">
+<hr class="featurette-divider">
 <% @issue.plans.each.with_index(1) do |plan, i| %>
 <h3>改善案<%= "#{i}" %></h3>
 

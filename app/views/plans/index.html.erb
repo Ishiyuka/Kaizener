@@ -20,9 +20,6 @@
         <td><%= plan.due_date_at %></td>
         <td><%= plan.status %></td>
         <td><%= plan.feedback %></td>
-        <td><%= link_to 'Show', plan %></td>
-        <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
-        <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +27,3 @@
 
 <br>
 
-<%= link_to 'New Plan', new_plan_path %>
