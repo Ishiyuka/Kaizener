@@ -4,6 +4,10 @@ class Plan < ApplicationRecord
   belongs_to :team
   enum status:{未完了: 0, 進行中: 1, 完了: 2 }
   enum feedback:{要改善: 0, 様子見: 1, 改善できた！: 2 }
+  validates :action, presence: true, length: { maximum: 200 }
+  validates :pic, presence: true
+  validates :due_date_at, presence: true
+  validates :status, presence: true
 
   def self.remind
     now = Date.current
@@ -17,4 +21,5 @@ class Plan < ApplicationRecord
     end
     puts "成功"
   end
+
 end
