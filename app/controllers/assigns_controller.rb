@@ -1,4 +1,6 @@
 class AssignsController < ApplicationController
+  before_action :email_exist?, only: [:create]
+  before_action :user_exist?, only: [:create]
 
   def index
     @assigns = current_user.assign_teams.all
@@ -28,7 +30,7 @@ class AssignsController < ApplicationController
   def email_exist?
     team = find_team(params[:team_id])
     if team.members.exists?(email: params[:email])
-      redirect_to team_url(team), notice: I18n.t('views.messages.email_already_exists')
+      redirect_to team_url(team), notice: "すでに同じメールアドレスが登録されています"
     end
   end
 
@@ -39,7 +41,7 @@ class AssignsController < ApplicationController
   def user_exist?
     team = find_team(params[:team_id])
     unless User.exists?(email: params[:email])
-      redirect_to team_url(team), notice: I18n.t('views.messages.does_not_exist_email')
+      redirect_to team_url(team), notice: "メールアドレスが存在しません。アカウントを作成してください。"
     end
   end
 
