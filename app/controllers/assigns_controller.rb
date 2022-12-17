@@ -1,4 +1,6 @@
 class AssignsController < ApplicationController
+  before_action :email_exist?, only: [:create]
+  before_action :user_exist?, only: [:create]
 
   def index
     @assigns = current_user.assign_teams.all
