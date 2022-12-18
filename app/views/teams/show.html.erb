@@ -26,9 +26,9 @@
         </tr>
       </thead>
       <tbody>
-          <% @assings.each do |assign| %>
+          <% @members.each do |member| %>
             <tr>
-              <td><%= assign.name %></td>
+              <td><%= member.name %></td>
             </tr>
           <% end %>
       </tbody>
@@ -64,9 +64,9 @@
               <td><%= issue.due_date_at %></td>
               <td><%= issue.priority %></td>
               <td><%= issue.status %></td>
-              <td><%= link_to 'Show', team_issue_path(issue.id, team_id: issue.team.id) %></td>
-              <td><%= link_to 'Edit', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
-              <td><%= link_to 'Destroy', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to '詳細', team_issue_path(issue.id, team_id: issue.team.id) %></td>
+              <td><%= link_to '編集', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
+              <td><%= link_to '削除', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -88,6 +88,13 @@
     </table>
 
 
-<%= link_to 'チームを編集する', edit_team_path(@team) %> |
+<% if @assign.present? %>
+  <%= link_to 'チームから外れる', team_assign_path(id: @assign.id, team_id: @assign.team_id), method: :delete, class: 'btn btn-danger' %>
+<% else %>
+<% end %>
+
+<% if current_user.id == @team.owner_id %>
+  <%= link_to 'チームを編集する', edit_team_path(@team) %>
+<% end %>
 <%= link_to 'チーム一覧', teams_path %>
 <%= link_to '課題一覧', team_issues_path(@team, @issue) %>

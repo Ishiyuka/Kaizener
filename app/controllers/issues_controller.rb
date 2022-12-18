@@ -1,10 +1,11 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[show edit update destroy]
   before_action :set_q, only: %i[index search]
-  before_action :set_teams, only: %i[ create edit update]
+  before_action :set_teams, only: %i[create edit update]
 
   # GET /issues or /issues.json
   def index
+    @team = current_user.assign_teams
     @issues = Issue.all
     @issues = @issue_q.result.order(:due_date_at)
     @plans = Plan.all
@@ -29,7 +30,7 @@ class IssuesController < ApplicationController
 
   # GET /issues/1/edit
   def edit
-    @issue.plans.build
+    # @issue.plans.build #この記載があると、空のブランクが出来てしまう。
   end
 
   # POST /issues or /issues.json
@@ -41,6 +42,7 @@ class IssuesController < ApplicationController
     if current_user.save && @issue.save
       redirect_to team_issue_path(@team, @issue), notice: "課題追加しました！"
     else
+      flash[:alert] = '追加出来ませんでした。'
       render :new
     end
   end
@@ -52,6 +54,7 @@ class IssuesController < ApplicationController
     if @issue.update(issue_params)
       redirect_to team_issue_path(params[:issue][:team_id]), notice:"更新しました"
     else
+      flash[:alert] = '更新出来ませんでした。'
       render :edit
     end
   end
@@ -60,9 +63,9 @@ class IssuesController < ApplicationController
   def destroy
     if current_user.id == @issue.user_id
       @issue.destroy
-      redirect_to issues_path(params[:issue][:team_id]), notice:"削除しました"
+      redirect_to team_issues_path(params[:team_id]), notice:"削除しました"
     else
-      redirect_to issues_path(params[:issue][:team_id]), notice: "権限なしのため削除できません。"
+      redirect_to team_issues_path(params[:team_id]), notice: "権限なしのため削除できません。"
     end
   end
 
@@ -74,19 +77,19 @@ class IssuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def issue_params
-      params.require(:issue).permit(:title, 
-                                    :detail, 
-                                    :image, 
-                                    :image_cache, 
-                                    :cause, 
-                                    :goal, 
-                                    :gap, 
-                                    :due_date_at, 
-                                    :priority, 
-                                    :status, 
+      params.require(:issue).permit(:title,
+                                    :detail,
+                                    :image,
+                                    :image_cache,
+                                    :cause,
+                                    :goal,
+                                    :gap,
+                                    :due_date_at,
+                                    :priority,
+                                    :status,
                                     :done_flag,
-                                    :id, 
-                                    :user_id, 
+                                    :id,
+                                    :user_id,
                                     :team_id,
                                     teams: %i[name owner_id],
                                     plans_attributes: %i[id user_id team_id action pic due_date_at status feedback _destroy])

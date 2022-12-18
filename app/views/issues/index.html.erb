@@ -40,14 +40,10 @@
           <td><%= issue.due_date_at %></td>
           <td><%= issue.priority %></td>
           <td><%= issue.status %></td>
-          <td><%= link_to 'Show', team_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to 'Edit', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to 'Destroy', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to '詳細', team_issue_path(issue.id, team_id: issue.team.id) %></td>
+          <td><%= link_to '編集', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
+          <td><%= link_to '削除', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: '削除して問題ないですか?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to '課題を新規作成する', new_team_issue_path %>

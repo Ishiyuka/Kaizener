@@ -67,23 +67,29 @@
         <div class="col-lg-4 text-center">
           <%= image_tag ("3ppl.png"), class: "img-fluid rounded-circle", style: "border-radius: 50%; object-fit:cover;" %>
           <h2 class = "heading text-center">チーム</h2>
-          <p class="text-center">チーム作成者はチームの編集と削除ができます。<br>
-          メールアドレスを使って、招待できます。
-          参加したいチームを見つけて参加もできます。</p>
-          <p class="text-center"><%= link_to('チーム一覧', teams_path, {class: "btn btn-secondary me-2"}) %></p>
+          <p class="text-center">
+          所属したいチームがない場合は作成出来ます。<br>
+          チーム作成者はチームの編集と削除ができます。<br>
+          メールアドレスを使って、招待できます。</p>
+          <p class="text-center"><%= link_to('チーム全体一覧', teams_path, {class: "btn btn-secondary me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4 text-center">
-        <%= image_tag ("meeting.png"), class: "img-fluid rounded-circle", style: "border-radius: 50%; object-fit:cover;"%>
-          <h2 class = "heading text-center" > 課題</h2>
-          <p class="text-center">問題が起きたらissue作成しましょう</p>
-          <p class="text-center"><%= link_to('解決したい課題一覧', team_issues_path(@team), {class: "btn btn-secondary me-2"}) %></p>
+        <%= image_tag ("meeting.png"), class: "img-fluid rounded-circle", style: "border-radius: 50%; width: 280px; height: 250px; object-fit:cover;"%>
+          <h2 class = "heading text-center" >課題</h2>
+          <p class="text-center">
+          所属チーム一覧から該当チームの詳細画面で課題を作成します。<br>
+          具体的に書くことで、解決策が見えてくるかもしれません。</p>
+          <p class="text-center"><%= link_to('所属チーム一覧', teams_path, {class: "btn btn-secondary me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4 text-center">
         <%= image_tag ("memo.png"), class: "img-fluid rounded-circle", style: "border-radius: 50%; width: 280px; height: 250px; object-fit:cover;" %>
           <h2 class = "heading text-center">アクション</h2>
-          <p class="text-center">マイページでアクションプランを確認しましょう</p>
+          <p class="text-center">
+          マイページでアクションプランを確認しましょう。<br>
+          期限が近づいているアクションプランを優先的に行いましょう。<br>
+          何か問題があれば遠慮なく、周りに相談しましょう。</p>
           <p class="text-center"><p class="text-center"><%= link_to('Action一覧', user_path(current_user), {class: "btn btn-secondary me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
@@ -205,10 +211,10 @@
               アクションプランの明確化<br>
             </h3>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>誰が Who?  いつ When?</li>
-              <li>どこで Where?  何を What?</li>
-              <li>なぜ Why?</li>
-              <li>どのように How?</li>
+              <li>Who? 誰が / When? いつ</li>
+              <li>Where? どこで / What? 何を</li>
+              <li>Why? なぜ / How? どのように</li>
+              <li>を明確にする</li>
             </ul>
           </div>
         </div>
@@ -224,9 +230,9 @@
               実際に行動に起こす<br>
             </h3>
             <ul class="list-unstyled mt-3 mb-4">
-              <li>計画に従って着実に業務を遂行</li>
-              <li>試行してみましょう</li>
-              <li>目標に対しての進捗度や結果を記録</li>
+              <li>計画に従って着実に業務を遂行する</li>
+              <li>計画通りに行うだけでなく試行する</li>
+              <li>目標に対しての進捗度や結果を記録する</li>
               <li>計画通りに進まない場合にも、その旨を記録する</li>
             </ul>
           </div>
@@ -246,7 +252,7 @@
               <li>設定した目標やアクションプランが達成できているか</li>
               <li>計画通りに実行できたかどうか</li>
               <li>そのプランに無理がないか</li>
-              <li>できなかったらなぜできなかったか分析</li>
+              <li>できなかったらなぜできなかったか分析する</li>
             </ul>
           </div>
         </div>
@@ -264,9 +270,8 @@
             </h3>
             <ul class="list-unstyled mt-3 mb-4">
               <li>引き続き計画通りに進める</li>
-              <li>計画を続ける中で、いくつかの視点を改善</li>
-              <li>計画を中止</li>
-              <li>延期する</li>
+              <li>計画を続ける中で、いくつかの視点を改善する</li>
+              <li>計画を中止 or 延期する</li>
             </ul>
           </div>
         </div>
