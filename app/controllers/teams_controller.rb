@@ -13,10 +13,10 @@ class TeamsController < ApplicationController
 
   # GET /teams/1 or /teams/1.json
   def show
-    @assing = current_user.assigns.find_by(team_id: @team.id)
-    @assings = @team.members
+    @assign = current_user.assigns.find_by(team_id: @team.id)
+    @members = @team.members
     @issues = @team.issues
-    @plans = @team.plans
+    # @plans = @team.plans
     data = @team.plans.group(:pic).count
     @data = data.transform_keys!{|k| User.find(k).name }
   end
@@ -38,23 +38,30 @@ class TeamsController < ApplicationController
       @team.invite_member(@team.owner)
       redirect_to teams_path(params[:team_id]), notice: "チームを作成しました"
     else
-      render 'new',notice: "作成出来ませんでした"
+      flash[:alert] = '作成出来ませんでした'
+      render :new
     end
   end
 
   # PATCH/PUT /teams/1 or /teams/1.json
   def update
-    if @team.update(team_params)
-      redirect_to teams_path(params[:team_id]), notice: "更新しました"
+    if current_user.id == @team.owner_id
+        @team.update(team_params)
+        redirect_to teams_path(params[:team_id]), notice: "更新しました"
     else
-      render :edit, notice: "更新できませんでした"
+      flash[:alert] = 'チームリーダーのみ編集が可能です。'
+      render :edit
     end
   end
 
   # DELETE /teams/1 or /teams/1.json
   def destroy
-    @team.destroy
-    redirect_to teams_path(params[:team_id]), notice: "チーム削除しました"
+    if current_user.id == @team.owner_id
+      @team.destroy
+      redirect_to teams_path(params[:team_id]), notice: "チーム削除しました"
+    else
+      redirect_to teams_path(params[:team_id]), notice: "チームリーダーのみ削除できます"
+    end
   end
 
   private

@@ -39,6 +39,20 @@
     </table>
 </div>
 
+<div>
+    <strong>自分が担当しているAction一覧</strong>
+    <table class="table">
+    <tbody>
+        <% @user.plans.each do |plan| %>
+        <tr>
+            <td><%= plan.action %></td>
+            <td><%= link_to "詳細", team_issue_plan_path(@team, @issue) %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+</div>
+
 <%= link_to "プロフィール編集", edit_user_registration_path %>
 <%= link_to 'すべてのチーム一覧', teams_path %>
 <%= link_to '参加チーム一覧', teams_path(my_team: "true") %>

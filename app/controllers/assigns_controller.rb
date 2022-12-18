@@ -19,6 +19,7 @@ class AssignsController < ApplicationController
 
   def destroy
     assign = Assign.find(params[:id])
+    assign.destroy #この記載漏れで、削除が出来ていなかった。
     redirect_to teams_path(params[:team_id]), notice: "#{assign.team.name}から外れました"
   end
 

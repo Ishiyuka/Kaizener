@@ -24,7 +24,7 @@ class PlansController < ApplicationController
 
   # GET /plans/1/edit
   def edit
-    @plan = @issue.plans.build
+    # @plan = @issue.plans.build
   end
 
   # POST /plans or /plans.json
@@ -36,7 +36,8 @@ class PlansController < ApplicationController
       if @plan.save
         redirect_to team_issue_plan_path(@team, @issue, plan), notice: "action planを作成しました"
       else
-        render new, notice: "保存できませんでした"
+        flash[:alert] = '保存出来ませんでした。'
+        render new
       end
   end
 
@@ -45,7 +46,8 @@ class PlansController < ApplicationController
     if @plan.update(plan_params)
       redirect_to @plan, notice: "action planを更新しました"
     else
-      render :edit, notice: "更新できませんでした"
+      flash[:alert] = '更新出来ませんでした。'
+      render :edit
     end
   end
 
@@ -74,7 +76,7 @@ class PlansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def plan_params
-      params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback,teams: %i[name owner_id])
+      params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback, :_destroy)
     end
 
     def set_teams

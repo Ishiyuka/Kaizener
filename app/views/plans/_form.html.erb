@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :team_name, "チーム名" %>
+    <%= form.collection_select(:team_id, current_user.assign_teams , :id, :name, include_blank: "選択して下さい" )  %>
+  </div>
+
+  <div class="field">
     <%= form.label :action %>
     <%= form.text_area :action, placeholder: "課題に対するアクションを記入しましょう" %>
   </div>
