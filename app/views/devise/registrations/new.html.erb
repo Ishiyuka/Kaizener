@@ -6,17 +6,17 @@
 
   <div class="field">
     <%= f.label :name %> <br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, placeholder: '山田　太郎' %>
   </div>
 
   <div class="field">
     <%= f.label :department %> <br />
-    <%= f.text_field :department %>
+    <%= f.text_field :department, placeholder: 'GSC' %><small>※任意</small>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'user_name@kaizener.com' %>
   </div>
 
   <div class="field">
@@ -24,19 +24,19 @@
     <% if @minimum_password_length %>
     <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: '6文字以上を入力してください' %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: '上記と同一のパスワードを入力してください' %>
   </div>
 
   <div class="field">
-    <%= f.label :icon %><p>※任意</p>
+    <%= f.label :icon %><small>※任意</small>
     <%= f.file_field :icon %>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit t('.sign_up') %>
   </div>

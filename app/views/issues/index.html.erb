@@ -2,7 +2,7 @@
 
 <%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
   <%= f.label :title_cont, '課題名' %>
-  <%= f.search_field :title_cont %>
+  <%= f.search_field :title_cont, placeholder: '検索したい題目を入力してください' %>
   <%= f.submit '検索' %>
 <% end %>
 
@@ -18,8 +18,8 @@
   <thead>
     <tr>
       <th></th>
-      <th>Team</th>
-      <th>Title</th>
+      <th>チーム名</th>
+      <th>題目</th>
       <th><%= sort_link(@issue_q, :due_date_at, "期限日") %></th>
       <th><%= sort_link(@issue_q, :priority, "優先度") %></th>
       <th><%= sort_link(@issue_q, :status, "進捗") %></th>
