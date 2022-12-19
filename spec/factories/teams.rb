@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :team do
-    name { "MyString" }
-    owner_id { 1 }
+    name { 'team1' }
+    owner { FactoryBot.create(:user) }
   end
 end

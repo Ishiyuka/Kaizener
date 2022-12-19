@@ -52,7 +52,7 @@ RSpec.describe "Users", type: :system do
     end
 
     context 'to log in as guest admin user ' do
-      it 'guest admin user can log in' do
+      it 'can log in' do
         visit root_path
         click_on 'ゲスト(管理者)ログイン'
         expect(page).to have_content '管理者'
@@ -64,6 +64,18 @@ RSpec.describe "Users", type: :system do
         visit root_path
         visit teams_path
         expect(page).to have_content 'ログインもしくはアカウント登録してください。'
+      end
+    end
+
+    describe 'function admin ' do
+      context 'when guest admin user go to admin page' do
+        it 'can go to the page' do
+          visit root_path
+          click_on 'ゲスト(管理者)ログイン'
+          sleep(1)
+          click_on '管理画面'
+          expect(page).to have_content 'Kaizen Admin'
+        end
       end
     end
   end
