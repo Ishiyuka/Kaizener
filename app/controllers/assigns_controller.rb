@@ -11,7 +11,7 @@ class AssignsController < ApplicationController
     user = email_reliable?(assign_params) ? User.find_or_create_by_email(assign_params) : nil
     if user
       team.invite_member(user)
-      redirect_to teams_path, notice: "アサインしました"
+      redirect_to team_path(team), notice: "アサインしました"
     else
       redirect_to teams_path, notice: "アサインに失敗しました"
     end
