@@ -6,16 +6,21 @@ RSpec.describe "Teams", type: :system do
   let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: leader)}
   let!(:assign){ FactoryBot.create(:assign, user: team_member, team: team)}
   let!(:assign){ FactoryBot.create(:assign, user: leader, team: team)}
-  before do
-    visit root_path
-    visit new_user_session_path
-    fill_in 'Eメール', with: 'leader@example.com'
-    fill_in 'パスワード', with: 'leader'
-    click_button 'ログイン'
-    visit teams_path
-  end
 
   describe 'the function to manage team' do
+
+    context 'to see teams index' do
+      it 'are shown all teams' do
+        visit root_path
+        visit new_user_session_path
+        fill_in 'Eメール', with: 'leader@example.com'
+        fill_in 'パスワード', with: 'leader'
+        click_button 'ログイン'
+        visit teams_path
+        expect(page).to have_content '一覧'
+      end
+    end
+
     context 'to create new team' do
       it 'is shown in index page' do
         visit root_path
