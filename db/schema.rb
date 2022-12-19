@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2022_12_10_084755) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "owner_id"
+    t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["owner_id"], name: "index_teams_on_owner_id"
