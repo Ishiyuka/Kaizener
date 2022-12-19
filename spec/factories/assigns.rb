@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :assign do
-    user { nil }
-    team { nil }
+    user { FactoryBot.create(:user)}
+    team { FactoryBot.create(:team)}
   end
 end
