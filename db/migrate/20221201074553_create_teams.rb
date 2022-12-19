@@ -1,8 +1,8 @@
 class CreateTeams < ActiveRecord::Migration[6.1]
   def change
     create_table :teams do |t|
-      t.string :name,null: false
-      t.integer :owner_id, index: true
+      t.string :name, null: false, unique: true
+      t.integer :owner_id, index: true, null: false
 
       t.timestamps
     end
