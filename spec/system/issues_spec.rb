@@ -81,7 +81,9 @@ RSpec.describe "Issues", type: :system do
         click_button 'ログイン'
         visit user_path(user)
         click_on '課題一覧'
+        sleep(10)
         click_on '編集'
+        sleep(5)
         fill_in '題目', with: 'changed b'
         click_on '更新する'
         expect(page).to have_content 'changed b'
@@ -148,6 +150,7 @@ RSpec.describe "Issues", type: :system do
         click_on '課題一覧'
         click_on '編集'
         click_on '削除'
+        page.driver.browser.switch_to.alert.accept
         expect(page).not_to have_content 'action'
       end
     end

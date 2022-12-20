@@ -7,10 +7,18 @@
 <% end %>
 
 <%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
-  <%= f.label :status, '進捗:' %>
+  <%= f.label :status, '進捗で絞り込み検索:' %>
   <%= f.radio_button :status_eq, '0' %>未完了
   <%= f.radio_button :status_eq, '1' %>進行中
   <%= f.radio_button :status_eq, '2' %>完了
+  <%= f.submit '検索' %>
+<% end %>
+
+<%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
+  <%= f.label :priority, '優先度で絞り込み検索:' %>
+  <%= f.radio_button :priority_eq, '0' %>高
+  <%= f.radio_button :priority_eq, '1' %>中
+  <%= f.radio_button :priority_eq, '2' %>低
   <%= f.submit '検索' %>
 <% end %>
 
