@@ -41,7 +41,7 @@
         <% @user.plans.each do |plan| %>
         <tr>
             <td><%= plan.action %></td>
-            <td><%= link_to "詳細", team_issue_plan_path(@team, @issue) %></td>
+            <td><%= link_to "詳細", team_issue_plan_path(@team, @issue, plan) %></td>
         </tr>
         <% end %>
     </tbody>
