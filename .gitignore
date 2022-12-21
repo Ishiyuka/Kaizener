@@ -39,3 +39,5 @@ yarn-debug.log*
 
 #dotenv-rails
 .env
+
+/google-cal
