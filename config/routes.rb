@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :assigns, only: %i[index create destroy]
     resources :issues do
       get 'search', on: :collection
-      resources :plans
+      resources :plans  do
+        resources :comments
+      end
     end
   end
 

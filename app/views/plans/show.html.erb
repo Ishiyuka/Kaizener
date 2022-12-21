@@ -1,26 +1,40 @@
-<p>
-  <strong>アクション名:</strong>
-  <%= @plan.action %>
-</p>
+<div class = "container">
+  <h3>改善案の詳細</h3>
 
-<p>
-  <strong>担当者:</strong>
-  <%= @plan.pic %>
-</p>
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>アクション</th>
+          <th>担当者</th>
+          <th>アクションの期限</th>
+          <th>アクションの状況</th>
+          <th>評価</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @plan.action %></td>
+          <td><%= @plan_pic %></td>
+          <td><%= @plan.due_date_at %></td>
+          <td><%= @plan.status %></td>
+          <td><%= @plan.feedback %></td>
+        </tr>
+      </tbody>
+    </table>
+</div>
 
-<p>
-  <strong>期限:</strong>
-  <%= @plan.due_date_at %>
-</p>
+  <hr style="height: 1px; width: 100%;">
+  <!--<p>コメント一覧</p> -->
 
-<p>
-  <strong>状況:</strong>
-  <%= @plan.status %>
-</p>
+  <!-- このcomments_areaというHTMLのidを取得して、そのdivの部分だけを更新する -->
+  <div id="comments_area">
+    <!-- 投稿されたコメント一覧をプランの詳細ページに表示するためのrender -->
+    <%= render partial:'comments/index', locals: { comments: @comments, plan: @plan }%>
+  </div>
 
-<p>
-  <strong>評価:</strong>
-  <%= @plan.feedback %>
-</p>
+  <!-- コメント入力欄をプランの詳細ページに表示するためのrender -->
+  <%= render partial: 'comments/form', locals: { comment: @comment, plan: @plan } %>
+
 
 <%= link_to 'マイページ', user_path(current_user)%>
