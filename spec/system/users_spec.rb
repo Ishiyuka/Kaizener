@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :system do
-
+RSpec.describe 'Users', type: :system do
   describe 'the function to sign in' do
     context 'to register new account' do
       it 'is shown the page of new uesr' do
@@ -17,9 +16,9 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
-  
+
   describe 'the function to session' do
-    let!(:user){ FactoryBot.create(:user)}
+    let!(:user) { FactoryBot.create(:user) }
     context 'to log in as general' do
       it 'user can log in' do
         visit new_user_session_path
@@ -30,7 +29,7 @@ RSpec.describe "Users", type: :system do
       end
     end
 
-    let!(:user){ FactoryBot.create(:user)}
+    let!(:user) { FactoryBot.create(:user) }
     context 'to log out as general ' do
       it 'user can log out' do
         visit new_user_session_path
@@ -46,7 +45,7 @@ RSpec.describe "Users", type: :system do
     context 'to log in as guest user' do
       it 'guest user can log in' do
         visit root_path
-        click_on "ゲスト(一般)ログイン"
+        click_on 'ゲスト(一般)ログイン'
         expect(page).to have_content '一般'
       end
     end

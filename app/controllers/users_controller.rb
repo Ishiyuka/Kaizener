@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def image
     @usr = User.where(user_id: current_user.id).where.not(image: nil)
   end
+
   private
 
   def user_params

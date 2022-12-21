@@ -40,7 +40,7 @@ class IssuesController < ApplicationController
     @issue.team = Team.find(params[:team_id])
     @issue.team_id = params[:issue][:team_id]
     if current_user.save && @issue.save
-      redirect_to team_issue_path(@team, @issue), notice: "課題追加しました！"
+      redirect_to team_issue_path(@team, @issue), notice: '課題追加しました！'
     else
       flash[:alert] = '追加出来ませんでした。'
       render :new
@@ -52,7 +52,7 @@ class IssuesController < ApplicationController
     # @issue = current_user.issues.build(issue_params)
     @issue.user_id = current_user.id
     if @issue.update(issue_params)
-      redirect_to team_issue_path(params[:issue][:team_id]), notice:"更新しました"
+      redirect_to team_issue_path(params[:issue][:team_id]), notice: '更新しました'
     else
       flash[:alert] = '更新出来ませんでした。'
       render :edit
@@ -63,44 +63,44 @@ class IssuesController < ApplicationController
   def destroy
     if current_user.id == @issue.user_id
       @issue.destroy
-      redirect_to team_issues_path(params[:team_id]), notice:"削除しました"
+      redirect_to team_issues_path(params[:team_id]), notice: '削除しました'
     else
-      redirect_to team_issues_path(params[:team_id]), notice: "権限なしのため削除できません。"
+      redirect_to team_issues_path(params[:team_id]), notice: '権限なしのため削除できません。'
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_issue
-      @issue = Issue.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def issue_params
-      params.require(:issue).permit(:title,
-                                    :detail,
-                                    :image,
-                                    :image_cache,
-                                    :cause,
-                                    :goal,
-                                    :gap,
-                                    :due_date_at,
-                                    :priority,
-                                    :status,
-                                    :done_flag,
-                                    :id,
-                                    :user_id,
-                                    :team_id,
-                                    teams: %i[name owner_id],
-                                    plans_attributes: %i[id user_id team_id action pic due_date_at status feedback _destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_issue
+    @issue = Issue.find(params[:id])
+  end
 
-    def set_q
-      @issue_q = Issue.ransack(params[:q])
-    end
+  # Only allow a list of trusted parameters through.
+  def issue_params
+    params.require(:issue).permit(:title,
+                                  :detail,
+                                  :image,
+                                  :image_cache,
+                                  :cause,
+                                  :goal,
+                                  :gap,
+                                  :due_date_at,
+                                  :priority,
+                                  :status,
+                                  :done_flag,
+                                  :id,
+                                  :user_id,
+                                  :team_id,
+                                  teams: %i[name owner_id],
+                                  plans_attributes: %i[id user_id team_id action pic due_date_at status feedback _destroy])
+  end
 
-    def set_teams
-      @team = Team.find(params[:team_id])
-    end
+  def set_q
+    @issue_q = Issue.ransack(params[:q])
+  end
 
+  def set_teams
+    @team = Team.find(params[:team_id])
+  end
 end

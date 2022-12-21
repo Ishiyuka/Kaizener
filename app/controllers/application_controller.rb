@@ -6,17 +6,14 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |_exception|
     redirect_to issues_path, alert: '画面を閲覧する権限がありません。'
   end
-  
+
   protected
-  
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name department icon icon_cache])
   end
 
   def check_admin_authorization
-    if request.path.start_with?('/admin')
-      authorize! :access_admin_page
-    end
+    authorize! :access_admin_page if request.path.start_with?('/admin')
   end
-
 end

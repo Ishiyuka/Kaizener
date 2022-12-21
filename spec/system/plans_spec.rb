@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Plans", type: :system do
-  let!(:user){ FactoryBot.create(:user, name: 'leader', email: 'leader@example.com')}
-  let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: user)}
-  let!(:assign){ FactoryBot.create(:assign, user: user, team: team)}
-  let!(:issue){ FactoryBot.create(:issue, user: user, team: team)}
-  let!(:plan){ FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s)}
+RSpec.describe 'Plans', type: :system do
+  let!(:user) { FactoryBot.create(:user, name: 'leader', email: 'leader@example.com') }
+  let!(:team) { FactoryBot.create(:team, name: 'fugafuga', owner: user) }
+  let!(:assign) { FactoryBot.create(:assign, user: user, team: team) }
+  let!(:issue) { FactoryBot.create(:issue, user: user, team: team) }
+  let!(:plan) { FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s) }
 
   describe 'management Plan' do
     context 'to create new plan' do
@@ -39,7 +39,9 @@ RSpec.describe "Plans", type: :system do
         fill_in 'パスワード', with: 'factory'
         click_button 'ログイン'
         visit user_path(user)
+        sleep(5)
         click_on '課題一覧'
+        sleep(5)
         click_on '編集'
         sleep(5)
         fill_in 'アクション', with: 'changed'

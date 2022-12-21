@@ -33,27 +33,27 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  #デバック
-  gem 'pry-rails'
+  # デバック
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'pry-rails'
 
-  #Rspec
-  gem 'spring'
-  gem 'rspec-rails'
-  gem 'spring-commands-rspec'
+  # Rspec
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
+  gem 'rspec-rails'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 
   # capistranoのツール一式
+  gem 'bcrypt_pbkdf'
   gem 'capistrano', '3.16.0'
+  gem 'capistrano3-unicorn'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
-  gem 'capistrano3-unicorn'
   gem 'ed25519'
-  gem 'bcrypt_pbkdf'
 end
 
 group :development do
@@ -61,11 +61,15 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
   gem 'letter_opener_web'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec'
 end
 
 group :test do
@@ -84,18 +88,18 @@ gem 'devise'
 gem 'devise-i18n'
 
 # 管理者画面
-gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
+gem 'rails_admin', '~> 3.0'
 
-#検索機能
+# 検索機能
 gem 'ransack'
 
-#画像アップロード
+# 画像アップロード
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem 'mini_magick'
 
-gem 'jquery-rails'
 gem 'cocoon'
+gem 'jquery-rails'
 
 # cron
 gem 'whenever', require: false
@@ -104,9 +108,9 @@ gem 'whenever', require: false
 gem 'chartkick'
 
 # herokuへデプロイするため
-gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
+gem 'net-smtp'
 
 # AWSへデプロイするため
 gem 'fog-aws'

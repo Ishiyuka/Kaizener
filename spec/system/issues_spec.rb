@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Issues", type: :system do
-  let!(:user){ FactoryBot.create(:user, name: 'leader', email: 'leader@example.com')}
-  let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: user)}
-  let!(:assign){ FactoryBot.create(:assign, user: user, team: team)}
-  let!(:issue){ FactoryBot.create(:issue, user: user, team: team)}
-  let!(:plan){ FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s)}
+RSpec.describe 'Issues', type: :system do
+  let!(:user) { FactoryBot.create(:user, name: 'leader', email: 'leader@example.com') }
+  let!(:team) { FactoryBot.create(:team, name: 'fugafuga', owner: user) }
+  let!(:assign) { FactoryBot.create(:assign, user: user, team: team) }
+  let!(:issue) { FactoryBot.create(:issue, user: user, team: team) }
+  let!(:plan) { FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s) }
   before do
     visit root_path
     visit new_user_session_path
@@ -48,7 +48,6 @@ RSpec.describe "Issues", type: :system do
       end
     end
 
-
     context 'to create new issue & plan' do
       it 'is shown new issue & plan' do
         visit root_path
@@ -81,7 +80,7 @@ RSpec.describe "Issues", type: :system do
         click_button 'ログイン'
         visit user_path(user)
         click_on '課題一覧'
-        sleep(10)
+        sleep(5)
         click_on '編集'
         sleep(5)
         fill_in '題目', with: 'changed b'
@@ -98,7 +97,9 @@ RSpec.describe "Issues", type: :system do
         fill_in 'パスワード', with: 'factory'
         click_button 'ログイン'
         visit user_path(user)
+        sleep(5)
         click_on '課題一覧'
+        sleep(5)
         click_on '編集'
         sleep(5)
         fill_in 'アクション', with: 'changed'
