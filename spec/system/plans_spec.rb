@@ -39,7 +39,9 @@ RSpec.describe "Plans", type: :system do
         fill_in 'パスワード', with: 'factory'
         click_button 'ログイン'
         visit user_path(user)
+        sleep(5)
         click_on '課題一覧'
+        sleep(5)
         click_on '編集'
         sleep(5)
         fill_in 'アクション', with: 'changed'
