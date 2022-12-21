@@ -1,29 +1,35 @@
-<h1>アクションプランの一覧</h1>
+<div class ="plans">
+  <h1>アクションプランの一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>アクション名</th>
-      <th>担当者</th>
-      <th>アクション期限</th>
-      <th>状況</th>
-      <th>評価</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @plans.each do |plan| %>
+  <table class ="table">
+    <thead>
       <tr>
-        <td><%= plan.action %></td>
-        <td><%= plan.pic %></td>
-        <td><%= plan.due_date_at %></td>
-        <td><%= plan.status %></td>
-        <td><%= plan.feedback %></td>
+        <th>アクション名</th>
+        <th>担当者</th>
+        <th>アクション期限</th>
+        <th>状況</th>
+        <th>評価</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @plans.each do |plan| %>
+        <tr>
+          <td><%= plan.action %></td>
+          <td><%= plan.pic %></td>
+          <td><%= plan.due_date_at %></td>
+          <td><%= plan.status %></td>
+          <td><%= plan.feedback %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="comment">
+  <p>
+    <%= link_to " #{plan.comments.count}件" , plan %>
+  </p>
+</div>
 

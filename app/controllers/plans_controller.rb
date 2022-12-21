@@ -13,6 +13,9 @@ class PlansController < ApplicationController
   def show
     @team = Team.find(@plan.team.id)
     @issue = Issue.find(@plan.issue.id)
+    @comments = @plan.comments
+    # @comment = @plan.comments.build
+    @plan_pic = User.find(@plan.pic).name
   end
 
   # GET /plans/new

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :issues, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :teams, foreign_key: :owner_id
+  has_many :comments, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

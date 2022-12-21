@@ -26,3 +26,5 @@ ja:
         due_date_at: 期日
         status: ステータス
         feedback: 評価
+      comment:
+        content: コメント
