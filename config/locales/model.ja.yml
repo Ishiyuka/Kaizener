@@ -9,6 +9,8 @@ ja:
       team:
         name: チーム名
         owner_id: リーダーid
+        description: 説明
+        team_image: チーム写真
       issue:
         title: 題目
         detail: 詳細

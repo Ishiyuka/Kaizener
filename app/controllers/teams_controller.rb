@@ -9,6 +9,8 @@ class TeamsController < ApplicationController
     else
       @teams = Team.all
     end
+    # @users = User.all
+    # @team_members =
   end
 
   # GET /teams/1 or /teams/1.json
@@ -73,6 +75,6 @@ class TeamsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def team_params
-    params.require(:team).permit(:name, :owner_id)
+    params.require(:team).permit(:name, :owner_id, :description, :team_image, :team_image_cache, :user_id)
   end
 end
