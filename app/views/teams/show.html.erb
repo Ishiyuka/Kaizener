@@ -1,100 +1,108 @@
 <div class="main-content">
-  <h1><%= @team.name %> の詳細</h1>
-  <p><strong>リーダー: <%= @team.owner.name %></strong></p>
+  <h2><%= @team.name %> の詳細</h2>
+  <% if current_user.id == @team.owner_id %>
+    <%= link_to 'チームを編集する', edit_team_path(@team) %>
+  <% end %>
 
-  <div>
-    <h5>チームメンバーを招待する</h5>
-    <%# <p>チームリーダーだけが行えます。<> %>
+  <div class="container">
+    <h5>チームに参加 / チームメンバーを招待する</h5>
     <%= form_with model: :assign, scope: :post, url: team_assigns_path(@team), local: true do |form| %>
       <div class="input-group input-group-sm">
-        <%= text_field_tag :email, '', { class: 'form-control', placeholder: "招待したい方のメールアドレスを入力してください" } %>
+        <%= text_field_tag :email, '', { class: 'form-control', placeholder: "参加したい場合 or 招待したい方のメールアドレスを入力してください" } %>
         <span class="input-group-append">
-          <button type="submit" class="btn btn-info btn-flat">招待</button>
+          <button type="submit" class="btn btn-info ">招待 / 参加</button>
         </span>
+          <% if @assign.present? %>
+            <%= link_to 'チームから外れる', team_assign_path(id: @assign.id, team_id: @assign.team_id), method: :delete, class: 'btn btn-danger my-2' %>
+          <% end %>
       </div>
     <% end %>
   </div>
 
 
-<div class="btn-cover">
-  <div class="user-show">
-    <table class="team-table">
-          <h3>チームメンバー</h3>
-      <thead>
-        <tr>
-          <th>名前</th>
-        </tr>
-      </thead>
-      <tbody>
-          <% @members.each do |member| %>
+
+
+    <h3>チームメンバー</h3>
+    <div class="card-group">
+      <% @members.each do |member| %>
+        <div class="card" style="width: 18rem;">
+        <% if member.icon?%>
+          <%= image_tag member.icon.url, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;"%>
+        <% else%>
+          <%= image_tag ("default_icon.jpeg"), style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+        <%end%>
+          <div class="card-body">
+            <% if member.id == @team.owner_id %>
+              <span class="badge rounded-pill bg-primary">リーダー</span>
+            <% end %>
+            <p class="card-title">名前：<%= member.name %></p>
+            <p class="card-text">部署名：<%= member.department %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+
+  <div class="btn-cover">
+    <div class="user-show">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= link_to '課題一覧', team_issues_path(@team, @issue) %></th>
+            <th>題目</th>
+            <th>期限日</th>
+            <th>優先度</th>
+            <th>進捗</th>
+            <th><small class ="text-info">詳細</small></th>
+            <th><small class ="text-success">編集</small></th>
+            <th><small class ="text-danger">削除</small></th>
+              <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @issues.each do |issue| %>
             <tr>
-              <td><%= member.name %></td>
+              <% if issue.done_flag == true %>
+                <td><h3><span class="badge rounded-pill bg-success">完 了</span></h3></td>
+              <% else %>
+                <td><h3><span class="badge rounded-pill bg-danger">未</span></h3></td>
+              <% end %>
+                <td><%= issue.title %></td>
+                <td><%= issue.due_date_at %></td>
+                <td><%= issue.priority %></td>
+                <td><%= issue.status %></td>
+                <td><%= link_to team_issue_path(issue.id, team_id: issue.team.id) do %><i class="bi bi-info-circle-fill text-info"></i><% end %></td>
+                <% if current_user.id == issue.user_id %>
+                  <td><%= link_to edit_team_issue_path(issue.id, team_id: issue.team.id) do %><i class="bi bi-pencil-square text-success"></i><% end %></td>
+                  <td><%= link_to team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger"></i><% end %></td>
+                <% end %>
             </tr>
           <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     </div>
   </div>
 
-<div class="btn-cover">
-  <div class="user-show">
-    <table class="team-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>チーム名</th>
-          <th>課題題目</th>
-          <th>期限日</th>
-          <th>優先度</th>
-          <th>進捗</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @issues.each do |issue| %>
-          <tr>
-            <% if issue.done_flag == true %>
-              <td> 完了 </td>
-            <% else %>
-              <td>未完了</td>
-            <% end %>
-              <td><%= issue.team.name %></td>
-              <td><%= issue.title %></td>
-              <td><%= issue.due_date_at %></td>
-              <td><%= issue.priority %></td>
-              <td><%= issue.status %></td>
-              <td><%= link_to '詳細', team_issue_path(issue.id, team_id: issue.team.id) %></td>
-              <td><%= link_to '編集', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
-              <td><%= link_to '削除', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
 
     <table>
       <thead>
         <tr>
-          <th> 担当者ごとのアクション数</th>
+          <th>担当者ごとのアクション数 </th>
         </tr>
       </thead>
         <tbody>
           <tr>
-            <td><%= column_chart @data, id: "column-chart", width: "200px", height: "200px"%></td>
+            <td><%= column_chart @data, id: "column-chart", width: "100px", height: "100px"%></td>
           </tr>
         </tbody>
     </table>
 
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">担当者ごとのアクション数</h5>
+        <p class="card-text"><%= column_chart @data, id: "column-chart", width: "200px", height: "200px"%></p>
+      </div>
+    </div>
 
-<% if @assign.present? %>
-  <%= link_to 'チームから外れる', team_assign_path(id: @assign.id, team_id: @assign.team_id), method: :delete, class: 'btn btn-danger' %>
-<% else %>
-<% end %>
-
-<% if current_user.id == @team.owner_id %>
-  <%= link_to 'チームを編集する', edit_team_path(@team) %>
-<% end %>
-<%= link_to 'チーム一覧', teams_path %>
-<%= link_to '課題一覧', team_issues_path(@team, @issue) %>
+</div>
