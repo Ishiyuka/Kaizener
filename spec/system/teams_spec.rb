@@ -1,14 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe "Teams", type: :system do
-  let!(:team_member){ FactoryBot.create(:user, name: 'team_member')}
-  let!(:leader){ FactoryBot.create(:user, name: 'leader', email: 'leader@example.com', password: 'leader', password_confirmation: 'leader')}
-  let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: leader)}
-  let!(:assign){ FactoryBot.create(:assign, user: team_member, team: team)}
-  let!(:assign){ FactoryBot.create(:assign, user: leader, team: team)}
+RSpec.describe 'Teams', type: :system do
+  let!(:team_member) { FactoryBot.create(:user, name: 'team_member') }
+  let!(:leader) { FactoryBot.create(:user, name: 'leader', email: 'leader@example.com', password: 'leader', password_confirmation: 'leader') }
+  let!(:team) { FactoryBot.create(:team, name: 'fugafuga', owner: leader) }
+  let!(:assign) { FactoryBot.create(:assign, user: team_member, team: team) }
+  let!(:assign) { FactoryBot.create(:assign, user: leader, team: team) }
 
   describe 'the function to manage team' do
-
     context 'to see teams index' do
       it 'are shown all teams' do
         visit root_path
@@ -30,7 +29,7 @@ RSpec.describe "Teams", type: :system do
         click_button 'ログイン'
         visit teams_path
         click_on '新たにチームを作成する'
-        fill_in 'team[name]', with:'hogehoge'
+        fill_in 'team[name]', with: 'hogehoge'
         click_on '登録する'
         expect(page).to have_content '作成しました'
       end
@@ -65,24 +64,23 @@ RSpec.describe "Teams", type: :system do
       end
     end
 
-  
-  describe 'the function to assign member to the team' do
-    context 'to invite the new member' do
-      it 'is shown the member\'s page' do
-        visit root_path
-        visit new_user_session_path
-        fill_in 'Eメール', with: 'leader@example.com'
-        fill_in 'パスワード', with: 'leader'
-        click_button 'ログイン'
-        visit teams_path
-        click_on '詳細'
-        invited_member = FactoryBot.create(:user, name: 'invited', email: 'invited@example.com')
-        fill_in 'email', with: 'invited@example.com'
-        click_on '招待'
-        expect(page).to have_content 'アサインしました'
+    describe 'the function to assign member to the team' do
+      context 'to invite the new member' do
+        it 'is shown the member\'s page' do
+          visit root_path
+          visit new_user_session_path
+          fill_in 'Eメール', with: 'leader@example.com'
+          fill_in 'パスワード', with: 'leader'
+          click_button 'ログイン'
+          visit teams_path
+          click_on '詳細'
+          invited_member = FactoryBot.create(:user, name: 'invited', email: 'invited@example.com')
+          fill_in 'email', with: 'invited@example.com'
+          click_on '招待'
+          expect(page).to have_content 'アサインしました'
+        end
       end
     end
-  end
     context 'to remove the team' do
       it 'is not shown the team' do
         visit root_path

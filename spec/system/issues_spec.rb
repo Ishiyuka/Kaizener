@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Issues", type: :system do
-  let!(:user){ FactoryBot.create(:user, name: 'leader', email: 'leader@example.com')}
-  let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: user)}
-  let!(:assign){ FactoryBot.create(:assign, user: user, team: team)}
-  let!(:issue){ FactoryBot.create(:issue, user: user, team: team)}
-  let!(:plan){ FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s)}
+RSpec.describe 'Issues', type: :system do
+  let!(:user) { FactoryBot.create(:user, name: 'leader', email: 'leader@example.com') }
+  let!(:team) { FactoryBot.create(:team, name: 'fugafuga', owner: user) }
+  let!(:assign) { FactoryBot.create(:assign, user: user, team: team) }
+  let!(:issue) { FactoryBot.create(:issue, user: user, team: team) }
+  let!(:plan) { FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s) }
   before do
     visit root_path
     visit new_user_session_path
@@ -47,7 +47,6 @@ RSpec.describe "Issues", type: :system do
         expect(page).to have_content '追加'
       end
     end
-
 
     context 'to create new issue & plan' do
       it 'is shown new issue & plan' do

@@ -34,7 +34,7 @@ class PlansController < ApplicationController
     @plan.user = current_user
     @plan.team_id = issue.team_id
       if @plan.save
-        redirect_to team_issue_plan_path(@team, @issue, plan), notice: "action planを作成しました"
+        redirect_to team_issue_plan_path(@team, @issue, plan), notice: 'action planを作成しました'
       else
         flash[:alert] = '保存出来ませんでした。'
         render new
@@ -44,7 +44,7 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1 or /plans/1.json
   def update
     if @plan.update(plan_params)
-      redirect_to @plan, notice: "action planを更新しました"
+      redirect_to @plan, notice: 'action planを更新しました'
     else
       flash[:alert] = '更新出来ませんでした。'
       render :edit
@@ -69,22 +69,22 @@ class PlansController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_plan
-      @plan = Plan.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def plan_params
-      params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback, :_destroy)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_plan
+    @plan = Plan.find(params[:id])
+  end
 
-    def set_teams
-      @team = Team.find(params[:team_id])
-    end
+  # Only allow a list of trusted parameters through.
+  def plan_params
+    params.require(:plan).permit(:action, :pic, :due_date_at, :status, :feedback, :_destroy)
+  end
 
-    def set_issues
-      @issue = Issue.find(params[:issue_id])
-    end
+  def set_teams
+    @team = Team.find(params[:team_id])
+  end
 
+  def set_issues
+    @issue = Issue.find(params[:issue_id])
+  end
 end

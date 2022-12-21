@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Plans", type: :system do
-  let!(:user){ FactoryBot.create(:user, name: 'leader', email: 'leader@example.com')}
-  let!(:team){ FactoryBot.create(:team, name: 'fugafuga', owner: user)}
-  let!(:assign){ FactoryBot.create(:assign, user: user, team: team)}
-  let!(:issue){ FactoryBot.create(:issue, user: user, team: team)}
-  let!(:plan){ FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s)}
+RSpec.describe 'Plans', type: :system do
+  let!(:user) { FactoryBot.create(:user, name: 'leader', email: 'leader@example.com') }
+  let!(:team) { FactoryBot.create(:team, name: 'fugafuga', owner: user) }
+  let!(:assign) { FactoryBot.create(:assign, user: user, team: team) }
+  let!(:issue) { FactoryBot.create(:issue, user: user, team: team) }
+  let!(:plan) { FactoryBot.create(:plan, user: user, team: team, issue: issue, pic: user.id.to_s) }
 
   describe 'management Plan' do
     context 'to create new plan' do

@@ -46,5 +46,5 @@ end
                 user_id: user.id,
                 team_id: team.id,
                 issue_id: issue.id
-                )
+  )
 end

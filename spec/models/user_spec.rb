@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validation for user' do
-
     # 名前、部署、メール、パスワードがあれば有効な状態であること
     context 'user with name, department, password, email' do
       it 'is valid' do
@@ -20,7 +19,8 @@ RSpec.describe User, type: :model do
           email: 'factory@example.com',
           password: 'factory',
           password_confirmation: 'factory',
-          admin: false)
+          admin: false
+        )
         expect(user).to be_invalid
       end
     end
@@ -32,12 +32,14 @@ RSpec.describe User, type: :model do
           name: 'test1',
           department: 'test1',
           email: 'test1@example.com',
-          password: 'test01')
+          password: 'test01'
+        )
         user = User.new(
           name: 'test1',
           department: 'test1',
           email: 'test1@example.com',
-          password: 'test01')
+          password: 'test01'
+        )
         expect(user).to be_invalid
       end
     end
