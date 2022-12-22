@@ -1,91 +1,96 @@
-<h3>課題詳細
-  <% if current_user.id == @issue.user_id %>
-    <%= link_to edit_team_issue_path(@team, @issue) do %><i class="bi bi-pencil-square text-success"></i><% end %>
-    <%= link_to team_issue_path(@team, @issue), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger"></i><% end %>
-  <% end%>
-</h3><br>
-<h5>課題作成者：<%= @issue.user.name %>
-
-<div class="row">
-  <div class="col">
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-            <% if @issue.image?%>
-              <%= image_tag @issue.image.url, class: "img-fluid"%>
-            <% else%>
-              <%= image_tag "default.jpeg", class: "img-fluid"%>
-            <%end%>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">改善前
-              <%  if @issue.done_flag %>
-                <span class="badge bg-secondary"><i class="bi bi-flag-fill"></i></span>
-              <% end %>
-            </h5>
-            <p class="card-text">課題の題目:<%= @issue.title %></p>
-            <p>詳細:<%= @issue.detail %></p>
-            <p>原因:<%= @issue.cause %></p>
-            <p>ギャップ:<%= @issue.gap %></p>
-            <p>期限:<%= @issue.due_date_at %></p>
-            <p>優先度:<%= @issue.priority %></p>
-            <p>状況:<%= @issue.status %></p>
-            <p class="card-text"><small class="text-muted">更新日：<%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S")%></small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="col">
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <% if @issue.image?%>
-            <%= image_tag @issue.image.url, class: "img-fluid" %>
-          <% else%>
-            <%= image_tag "default.jpeg", class: "img-fluid"%>
-          <%end%>
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">改善後:</h5>
-            <p class="card-text">目標：<%= @issue.goal %></p>
-            <p>結果：</p>
-            <p class="card-text"><small class="text-muted">更新日： <%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<%= link_to '所属チームの課題一覧に戻る', team_issues_path(@team) %>
-
-<hr class="featurette-divider">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>アクション</th>
-        <th>担当者</th>
-        <th>アクションの期限</th>
-        <th>アクションの状況</th>
-        <th>評価</th>
-      </tr>
-    </thead>
-    <h5>改善案</h5>
-    <% @issue.plans.each.with_index(1) do |plan, i| %>
-    <tbody>
-      <tr>
-        <td><%= "#{i}" %></td>
-        <td><%= plan.action %></td>
-        <td><%= User.find(plan.pic).name %></td>
-        <td><%= plan.due_date_at %></td>
-        <td><%= plan.status %></td>
-        <td><%= plan.feedback %></td>
-        <td><%= link_to team_issue_plan_path(@team, @issue) do %><i class="bi bi-info-circle-fill text-info"></i><% end %></td>
-      </tr>
+<div class="container">
+  <h3><%= "#{@issue.team.name}" %>の課題詳細</h3>
+    <% if current_user.id == @issue.user_id %>
+    <h5>
+      <%= link_to edit_team_issue_path(@team, @issue) do %><i class="bi bi-pencil-square text-success" style="font-size: 1.5rem;" ></i>課題と改善案を編集<% end %>
+      <%= link_to team_issue_path(@team, @issue), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger" style="font-size: 1.5rem;"></i>削除<% end %>
     <% end %>
-    </tbody>
-  </table>
+      <%= link_to team_issues_path(@team) do %><i class="bi bi-arrow-left-square-fill" style="font-size: 1.5rem;"></i>所属チームの課題一覧に戻る<% end %>
+    </h5>
+    <h5>課題作成者：<%= @issue.user.name %></h5>
+
+    <div class="row">
+      <div class="col">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+                <% if @issue.image?%>
+                  <%= image_tag @issue.image.url, class: "img-fluid"%>
+                <% else%>
+                  <%= image_tag "default.jpeg", class: "img-fluid"%>
+                <%end%>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">改善前
+                  <%  if @issue.done_flag %>
+                    <span class="badge bg-secondary"><i class="bi bi-flag-fill"></i></span>
+                  <% end %>
+                </h5>
+                <p class="card-text">課題の題目:<%= @issue.title %></p>
+                <p>詳細:<%= @issue.detail %></p>
+                <p>原因:<%= @issue.cause %></p>
+                <p>ギャップ:<%= @issue.gap %></p>
+                <p>期限:<%= @issue.due_date_at %></p>
+                <p>優先度:<%= @issue.priority %></p>
+                <p>状況:<%= @issue.status %></p>
+                <p class="card-text"><small class="text-muted">更新日：<%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S")%></small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <% if @issue.image?%>
+                <%= image_tag @issue.image.url, class: "img-fluid" %>
+              <% else%>
+                <%= image_tag "default.jpeg", class: "img-fluid"%>
+              <%end%>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">改善後:</h5>
+                <p class="card-text">目標：<%= @issue.goal %></p>
+                <p>結果：</p>
+                <p class="card-text"><small class="text-muted">更新日： <%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <hr class="featurette-divider">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>アクション</th>
+          <th>担当者</th>
+          <th>アクションの期限</th>
+          <th>アクションの状況</th>
+          <th>評価</th>
+          <th>コメント</th>
+        </tr>
+      </thead>
+      <h5>改善案</h5>
+      <% @issue.plans.each.with_index(1) do |plan, i| %>
+      <tbody>
+        <tr>
+          <td><%= "#{i}" %></td>
+          <td><%= plan.action %></td>
+          <td><%= User.find(plan.pic).name %></td>
+          <td><%= plan.due_date_at %></td>
+          <td><%= plan.status %></td>
+          <td><%= plan.feedback %></td>
+          <td><%= link_to team_issue_plan_path(@team, @issue) do %><i class="bi bi-info-circle-fill text-info" style="font-size: 1.5rem;"></i><% end %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+</div>

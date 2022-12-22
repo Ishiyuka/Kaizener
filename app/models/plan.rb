@@ -8,6 +8,7 @@ class Plan < ApplicationRecord
   validates :pic, presence: true
   validates :due_date_at, presence: true
   validates :status, presence: true
+  validates :feedback, presence: true
   has_many :comments, dependent: :destroy
 
   def self.remind

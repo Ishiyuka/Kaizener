@@ -1,51 +1,54 @@
-<h3><%= "#{@user.name}のマイページ" %>  (<%= "ユーザーID##{@user.id}" %>)</h3>
-<hr/>
+<div class="container">
+    <h3><%= "#{@user.name}のマイページ" %>  (<%= "ユーザーID##{@user.id}" %>)</h3>
+    <hr/>
 
-<p>
-    <strong>プロフィール画像</strong><br>
-    <% if @user.icon?%>
-        <%= image_tag @user.icon.url, style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;"%>
-    <% else%>
-        <%= image_tag ("default_icon.jpeg"), style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;" %>
-    <%end%>
-</p>
-<p><strong>ユーザー名</strong><%= @user.name %></p>
-<p><strong>部署名</strong><%= @user.department %></p>
-<p><strong>メールアドレス</strong><%= @user.email %></p>
-<%= link_to "プロフィール編集", edit_user_registration_path %>
 
-<hr class="featurette-divider">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
 
-<div>
-    <h3>所属チーム</h3>
-    <table class="table">
-    <tbody>
-        <% @user.assign_teams.each do |team| %>
-        <tr>
-            <td><%= team.name %></td>
-            <td><%= link_to "詳細", team_path(team) %></td>
-            <td><%= link_to '課題一覧', team_issues_path(team) %></td>
-            <td><%= link_to '課題追加', new_team_issue_path(team) %></td>
-        </tr>
+                <% if @user.icon?%>
+                    <%= image_tag @user.icon.url, style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;"%>
+                <% else%>
+                    <%= image_tag ("default_icon.jpeg"), style: "border-radius: 50%; width: 120px; height: 120px; object-fit:cover;" %>
+                <%end%>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">ユーザー名：<%= @user.name %></h5>
+                    <p class="card-text">部署名：<%= @user.department %></p>
+                    <p class="card-text">メールアドレス<%= @user.email %></p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+        <%= link_to "プロフィール編集", edit_user_registration_path %>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="action_table">
+        <% if @user.plans.present? %>
+            <h3>自分が担当している未完了のAction一覧  <%= @user.plans.count %>件</h3>
         <% end %>
-    </tbody>
-    </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>アクション</th>
+                    <th>期日</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @user.plans.each do |plan| %>
+                    <%if plan.status == "未完了" %>
+                    <tr>
+                        <td><%= plan.action %></td>
+                        <td><%= plan.due_date_at %></td>
+                        <td><%= link_to "詳細", team_issue_plan_path(@team, @issue, plan) %></td>
+                    </tr>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<hr class="featurette-divider">
-
-<!--
-<div>
-    <h3>自分が担当しているAction一覧</h3>
-    <table class="table">
-    <tbody>
-        <% @user.plans.each do |plan| %>
-        <tr>
-            <td><%= plan.action %></td>
-            <td><%= link_to "詳細", team_issue_plan_path(@team, @issue, plan) %></td>
-        </tr>
-        <% end %>
-    </tbody>
-    </table>
-</div>
--->

@@ -1,5 +1,122 @@
-<h2>課題の新規追加</h2>
+<h3>課題の新規追加</h3>
+<%= form_with(model: [@team,@issue]) do |form| %>
+  <% if @issue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
 
-<%= render "form" %>
+      <ul>
+        <% @issue.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+  <% end %>
+  <%= form.hidden_field :team_id, value: @team.id%>
 
-<%= link_to '所属チーム一覧', teams_path(my_team: "true") %>
+<form>
+  <div class="row mb-3">
+    <%= form.label :title, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+      <%= form.text_field :title, class: 'form-control', placeholder: '課題内容' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :detail, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :detail, class: 'form-control', placeholder: '課題の詳細を記入しましょう' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :image, "改善前", {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-5">
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :cause, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :cause, class: 'form-control', placeholder: '課題が起きた原因を記入しましょう' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :goal, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :goal, class: 'form-control', placeholder: 'ゴールを記入しましょう' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :gap, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :gap, class: 'form-control', placeholder: 'ゴールに対して現状とどうギャップがあるか記入しましょう' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :due_date_at, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.date_field :due_date_at, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :status, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.select :status, Issue.statuses.keys.to_a, include_blank: "選択して下さい", class: 'form-select' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= form.label :priority, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.select :priority, Issue.priorities.keys.to_a, include_blank: "選択して下さい", class: 'form-select' %>
+    </div>
+  </div>
+
+  <!--<h5>▽改善後に記入</h5>
+  <div class="row mb-3">
+    <%= form.label :image, "改善後", {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-5">
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-10 offset-sm-2">
+      <div class="form-check">
+        <%= form.check_box :done_flag, {class: 'form-check-input'} %>
+        <%= form.label :done_flag, {class: 'form-check-label'} %>
+      </div>
+    </div>
+  </div>-->
+
+  <%= form.hidden_field :user_id, value: current_user.id%>
+
+  <hr style="height: 1px; width: 100%;">
+
+  <div id='plan_field'>
+    <%= form.fields_for :plans do |plan| %>
+      <%= render 'plan_fields', f: plan %>
+    <% end %>
+    <%= form.hidden_field :user_id, value: current_user.id%>
+
+    <div id='links'>
+      <%= link_to_add_association '+アクションプランを追加',form, :plans, 
+        class: 'add_fields', id: 'add-btn',
+        data: {
+        association_insertion_node: '#detail-association-insertion-point', 
+        association_insertion_method: 'after'
+        } %>
+    </div>
+    <div id="detail-association-insertion-point"></div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  </div>
+<% end %>
+
+
+<!--<%= render "form" %>-->
