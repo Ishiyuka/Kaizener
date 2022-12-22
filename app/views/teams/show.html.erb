@@ -1,7 +1,7 @@
 <div class="main-content">
   <h3><%= @team.name %> の詳細</h3>
   <% if current_user.id == @team.owner_id %>
-    <%= link_to 'チームを編集する', edit_team_path(@team) %>
+    <%= link_to 'チームを編集する', edit_team_path(@team), class: 'btn btn-primary' %>
   <% end %>
 
   <div class="container">
@@ -17,20 +17,19 @@
     <% end %>
 
     <h3 class="mt-5">チームメンバー</h3>
-    <div class="card-group">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
       <% @members.each do |member| %>
-        <div class="card" style="width: 18rem;">
-        <% if member.icon?%>
-          <%= image_tag member.icon.url, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;"%>
-        <% else%>
-          <%= image_tag ("default_icon.jpeg"), style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
-        <%end%>
-          <div class="card-body">
-            <% if member.id == @team.owner_id %>
-              <span class="badge rounded-pill bg-primary">リーダー</span>
-            <% end %>
-            <p class="card-title">名前：<%= member.name %></p>
-            <p class="card-text">部署名：<%= member.department %></p>
+        <div class="col">
+          <div class="card">
+            <% if member.icon?%>
+              <%= image_tag member.icon.url, style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;"%>
+            <% else%>
+              <%= image_tag ("default_icon.jpeg"), style: "border-radius: 50%; width: 50px; height: 50px; object-fit:cover;" %>
+            <%end%>
+            <div class="card-body">
+              <h5 class="card-title">名前：<%= member.name %></h5>
+                <p class="card-text">部署名：<%= member.department %></p>
+            </div>
           </div>
         </div>
       <% end %>

@@ -18,11 +18,11 @@
                     <h5 class="card-title">ユーザー名：<%= @user.name %></h5>
                     <p class="card-text">部署名：<%= @user.department %></p>
                     <p class="card-text">メールアドレス<%= @user.email %></p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text"><small class="text-muted">更新日：<%= @user.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
                 </div>
             </div>
         </div>
-        <%= link_to "プロフィール編集", edit_user_registration_path %>
+        <%= link_to "プロフィール編集", edit_user_registration_path, class: 'btn btn-primary' %>
     </div>
 
     <hr class="featurette-divider">
@@ -36,6 +36,7 @@
                 <tr>
                     <th>アクション</th>
                     <th>期日</th>
+                    <th>詳細・コメント</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +45,7 @@
                     <tr>
                         <td><%= plan.action %></td>
                         <td><%= plan.due_date_at %></td>
-                        <td><%= link_to "詳細", team_issue_plan_path(@team, @issue, plan) %></td>
+                        <td><%= link_to team_issue_plan_path(@team, @issue, plan) do %><i class="bi bi-info-circle-fill text-info" style="font-size: 1.5rem;"></i><% end %></td>
                     </tr>
                     <% end %>
                 <% end %>

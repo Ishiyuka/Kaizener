@@ -2,7 +2,7 @@
   <div class="row mx-auto">
     <div class="col-5">
 
-      <h3>改善案</h3>
+      <h3>改善案</h3><small>※記入する際は全て入力してください</small>
         <%= f.hidden_field :id %>
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :team_id, value: @team.id %>
@@ -15,6 +15,7 @@
               <th><%= f.label :due_date_at %></th>
               <th><%= f.label :status %></th>
               <th><%= f.label :feedback %></th>
+              <th></th>
             </tr>
           </thead>
           <% @issue.plans.each do |plan, i| %>
@@ -25,7 +26,7 @@
               <td><%= f.date_field :due_date_at %></td>
               <td><%= f.select :status, Plan.statuses.keys.to_a,include_blank: "選択して下さい"  %></td>
               <td><%= f.select :feedback, Plan.feedbacks.keys.to_a,include_blank: "選択して下さい"  %></td>
-              <td><%= link_to_remove_association "削除", f, class: "btn btn-secondary btn-block" %></td>
+              <td><%= link_to_remove_association "削除", f, class: "btn btn-danger btn-block" %></td>
             </tr>
           <% end %>
           </tbody>
