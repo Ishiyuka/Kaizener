@@ -7,7 +7,8 @@ class IssuesController < ApplicationController
   def index
     @team = current_user.assign_teams
     @issues = Issue.all
-    @issues = @issue_q.result.order(:due_date_at)
+    # @issue = Issue.where(done_flag: true)
+    @issues = @issue_q.result.order(:done_flag).order(:due_date_at)
     @plans = Plan.all
   end
 

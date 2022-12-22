@@ -1,4 +1,11 @@
-<h2>課題詳細</h2>
+<h3>課題詳細
+  <% if current_user.id == @issue.user_id %>
+    <%= link_to edit_team_issue_path(@team, @issue) do %><i class="bi bi-pencil-square text-success"></i><% end %>
+    <%= link_to team_issue_path(@team, @issue), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger"></i><% end %>
+  <% end%>
+</h3><br>
+<h5>課題作成者：<%= @issue.user.name %>
+
 <div class="row">
   <div class="col">
     <div class="card mb-3" style="max-width: 540px;">
@@ -17,16 +24,14 @@
                 <span class="badge bg-secondary"><i class="bi bi-flag-fill"></i></span>
               <% end %>
             </h5>
-            <p class="card-text">
-              課題の題目:<%= @issue.title %><br>
-              詳細:<%= @issue.detail %><br>
-              原因:<%= @issue.cause %><br>
-              ギャップ:<%= @issue.gap %><br>
-              期限:<%= @issue.due_date_at %><br>
-              優先度:<%= @issue.priority %><br>
-              状況:<%= @issue.status %><br>
-            </p>
-            <p class="card-text"><small class="text-muted">Last updated <%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S")%></small></p>
+            <p class="card-text">課題の題目:<%= @issue.title %></p>
+            <p>詳細:<%= @issue.detail %></p>
+            <p>原因:<%= @issue.cause %></p>
+            <p>ギャップ:<%= @issue.gap %></p>
+            <p>期限:<%= @issue.due_date_at %></p>
+            <p>優先度:<%= @issue.priority %></p>
+            <p>状況:<%= @issue.status %></p>
+            <p class="card-text"><small class="text-muted">更新日：<%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S")%></small></p>
           </div>
         </div>
       </div>
@@ -46,17 +51,16 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">改善後:</h5>
-            <p class="card-text">
-            目標：<%= @issue.goal %><br>
-            結果：</p>
-            <p class="card-text"><small class="text-muted">Last updated <%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
+            <p class="card-text">目標：<%= @issue.goal %></p>
+            <p>結果：</p>
+            <p class="card-text"><small class="text-muted">更新日： <%= @issue.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<%= link_to '所属チームの課題一覧に戻る', team_issues_path(@team) %>
 
 <hr class="featurette-divider">
   <table class="table table-hover">
@@ -80,14 +84,8 @@
         <td><%= plan.due_date_at %></td>
         <td><%= plan.status %></td>
         <td><%= plan.feedback %></td>
+        <td><%= link_to team_issue_plan_path(@team, @issue) do %><i class="bi bi-info-circle-fill text-info"></i><% end %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-
-<%= link_to '改善案詳細ページ', team_issue_plan_path(@team, @issue) %>
-
-<%= link_to edit_team_issue_path(@team, @issue) do %>
-  <i class="bi bi-pen"></i>|
-<% end %>
-<%= link_to '課題一覧', team_issues_path(@team) %>

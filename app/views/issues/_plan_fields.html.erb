@@ -8,31 +8,33 @@
         <%= f.hidden_field :team_id, value: @team.id %>
 
 
-        <div class="field">
-          <%= f.label :action %>
-          <%= f.text_area :action, placeholder: "課題に対して、解決するためのアクションを記入しましょう" %>
-        </div>
-
-        <div class="field">
-          <%= f.label :pic %>
-          <%= f.collection_select(:pic, @team.members, :id, :name, include_blank: '選択') %>
-        </div>
-
-        <div class="field">
-          <%= f.label :due_date_at %>
-          <%= f.date_field :due_date_at %>
-        </div>
-
-        <div class="field">
-          <%= f.label :status %>
-          <%= f.select :status, Plan.statuses.keys.to_a,include_blank: "選択して下さい"  %>
-        </div>
-
-        <div class="field">
-          <%= f.label :feedback %>
-          <%= f.select :feedback, Plan.feedbacks.keys.to_a,include_blank: "選択して下さい"  %>
-        </div>
-        <%= link_to_remove_association "削除", f, class: "btn btn-secondary btn-block" %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th><%= f.label :action %></th>
+              <th><%= f.label :pic %></th>
+              <th><%= f.label :due_date_at %></th>
+              <th><%= f.label :status %></th>
+              <th><%= f.label :feedback %></th>
+            </tr>
+          </thead>
+          <h5>改善案</h5>
+          <% @issue.plans.each.with_index(1) do |plan, i| %>
+          <tbody>
+            <tr>
+              <td><%= "#{i}" %></td>
+              <td><%= f.text_area :action, placeholder: "課題に対して、解決するためのアクションを記入しましょう" %></td>
+              <td><%= f.collection_select(:pic, @team.members, :id, :name, include_blank: '選択') %></td>
+              <td><%= f.date_field :due_date_at %></td>
+              <td><%= f.select :status, Plan.statuses.keys.to_a,include_blank: "選択して下さい"  %></td>
+              <td><%= f.select :feedback, Plan.feedbacks.keys.to_a,include_blank: "選択して下さい"  %></td>
+              <td><%= link_to_remove_association "削除", f, class: "btn btn-secondary btn-block" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
     </div>
   </div>
 </div>
+

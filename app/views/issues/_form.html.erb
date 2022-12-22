@@ -11,59 +11,85 @@
   <% end %>
   <%= form.hidden_field :team_id, value: @team.id%>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, placeholder: "課題内容" %>
+<form>
+  <div class="row mb-3">
+    <%= form.label :title, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-10">
+      <%= form.text_field :title, class: 'form-control', placeholder: '課題内容' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :detail %>
-    <%= form.text_area :detail, placeholder: "課題の詳細を記入しましょう" %>
+  <div class="row mb-3">
+    <%= form.label :detail, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :detail, class: 'form-control', placeholder: '課題の詳細を記入しましょう' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :image ,"改善前" %>
-    <%= form.file_field :image %>
+  <div class="row mb-3">
+    <%= form.label :image, "改善前", {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-5">
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :image, "改善後" %>
-    <%= form.file_field :image %>
+  <div class="row mb-3">
+    <%= form.label :cause, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :cause, class: 'form-control', placeholder: '課題が起きた原因を記入しましょう' %>
+    </div>
   </div>
 
-    <div class="field">
-      <%= form.label :cause %>
-      <%= form.text_area :cause, placeholder: "課題が起きた原因を記入しましょう" %>
+  <div class="row mb-3">
+    <%= form.label :goal, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :goal, class: 'form-control', placeholder: 'ゴールを記入しましょう' %>
+    </div>
   </div>
 
-    <div class="field">
-      <%= form.label :goal %>
-      <%= form.text_area :goal, placeholder: "ゴールを記入しましょう" %>
+  <div class="row mb-3">
+    <%= form.label :gap, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-8">
+      <%= form.text_area :gap, class: 'form-control', placeholder: 'ゴールに対して現状とどうギャップがあるか記入しましょう' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :gap %>
-    <%= form.text_area :gap, placeholder: "ゴールに対して現状とどうギャップがあるか記入しましょう" %>
+  <div class="row mb-3">
+    <%= form.label :due_date_at, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.date_field :due_date_at, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :due_date_at %>
-    <%= form.date_field :due_date_at %>
+  <div class="row mb-3">
+    <%= form.label :status, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.select :status, Issue.statuses.keys.to_a, include_blank: "選択して下さい", class: 'form-select' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :status %><br>
-    <%= form.select :status, Issue.statuses.keys.to_a,include_blank: "選択して下さい"  %>
+  <div class="row mb-3">
+    <%= form.label :priority, {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-3">
+      <%= form.select :priority, Issue.priorities.keys.to_a, include_blank: "選択して下さい", class: 'form-select' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :priority %><br>
-    <%= form.select :priority, Issue.priorities.keys.to_a,include_blank: "選択して下さい"  %>
+  <h5>▽改善後に記入</h5>
+  <div class="row mb-3">
+    <%= form.label :image, "改善後", {class: 'col-sm-2 col-form-label'} %>
+    <div class="col-sm-5">
+      <%= form.file_field :image, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :done_flag %>
-    <%= form.check_box :done_flag %>
+  <div class="row mb-3">
+    <div class="col-sm-10 offset-sm-2">
+      <div class="form-check">
+        <%= form.check_box :done_flag, {class: 'form-check-input'} %>
+        <%= form.label :done_flag, {class: 'form-check-label'} %>
+      </div>
+    </div>
   </div>
 
   <%= form.hidden_field :user_id, value: current_user.id%>
@@ -90,3 +116,4 @@
     </div>
   </div>
 <% end %>
+

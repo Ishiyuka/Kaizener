@@ -1,4 +1,10 @@
-<h1><%= t('.display')%></h1>
+<h2><%= t('.display')%></h1>
+
+<%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
+  <%= f.label :title_cont, 'チーム名' %>
+  <%= f.search_field :title_cont, placeholder: '検索したいチームを入力してください' %>
+  <%= f.submit '検索' %>
+<% end %>
 
 <%= search_form_for @issue_q, url: search_team_issues_path do |f| %>
   <%= f.label :title_cont, '課題名' %>
@@ -22,36 +28,37 @@
   <%= f.submit '検索' %>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>チーム名</th>
-      <th>題目</th>
-      <th><%= sort_link(@issue_q, :due_date_at, "期限日") %></th>
-      <th><%= sort_link(@issue_q, :priority, "優先度") %></th>
-      <th><%= sort_link(@issue_q, :status, "進捗") %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @issues.each do |issue| %>
+  <table class ="table">
+    <thead>
       <tr>
-        <% if issue.done_flag == true %>
-          <td> 完了 </td>
-        <% else %>
-          <td>未完了</td>
-        <% end %>
-          <td><%= issue.team.name %></td>
-          <td><%= issue.title %></td>
-          <td><%= issue.due_date_at %></td>
-          <td><%= issue.priority %></td>
-          <td><%= issue.status %></td>
-          <td><%= link_to '詳細', team_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to '編集', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
-          <td><%= link_to '削除', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: '削除して問題ないですか?' } %></td>
+        <th></th>
+        <th>チーム名</th>
+        <th>題目</th>
+        <th><%= sort_link(@issue_q, :due_date_at, "期限日") %></th>
+        <th><%= sort_link(@issue_q, :priority, "優先度") %></th>
+        <th><%= sort_link(@issue_q, :status, "進捗") %></th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @issues.each do |issue| %>
+        <tr>
+          <% if issue.done_flag == true %>
+            <td> 完了 </td>
+          <% else %>
+            <td>未完了</td>
+          <% end %>
+            <td><%= issue.team.name %></td>
+            <td><%= issue.title %></td>
+            <td><%= issue.due_date_at %></td>
+            <td><%= issue.priority %></td>
+            <td><%= issue.status %></td>
+            <td><%= link_to '詳細', team_issue_path(issue.id, team_id: issue.team.id) %></td>
+            <td><%= link_to '編集', edit_team_issue_path(issue.id, team_id: issue.team.id) %></td>
+            <td><%= link_to '削除', team_issue_path(issue.id, team_id: issue.team.id), method: :delete, data: { confirm: '削除して問題ないですか?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
