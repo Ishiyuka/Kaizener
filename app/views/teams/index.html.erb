@@ -1,29 +1,37 @@
-<h1><%= t('.display') %></h1>
-  <%= link_to '新たにチームを作成する', new_team_path %>
-  <div class="card-group">
-    <% @teams.each do |team| %>
-      <div class="card" style="width: 18rem;">
+<h3><%= t('.display') %></h3>
+  <%= link_to '新たにチームを作成する', new_team_path, class: 'btn btn-primary' %>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @teams.each do |team| %>
+    <div class="col">
+      <div class="card">
         <% if team.team_image?%>
           <%= image_tag team.team_image.url, class: "img-fluid", size: "100x100" %>
         <% else%>
           <%= image_tag ("default_team.png"), class: "img-fluid", size: "100x100" %>
         <%end%>
         <div class="card-body">
+            <%if team.members.include?(current_user) %>
+              <span class="badge bg-info">参加中</span>
+            <% end %>
           <h5 class="card-title">チーム名：<strong><%= team.name %></strong></h5>
-          <p class="card-text">詳細：<%= team.description %></p>
-            <%= link_to team_path(team) do %><i class="bi bi-info-circle-fill text-info"></i><% end %>
+            <p class="card-text">詳細：<%= team.description %></p>
+            <p class="card-text">リーダー：<%= team.owner.name %></p>
+            <p><%= link_to 'チームの課題一覧', team_issues_path(team) %></p>
+            <p><%= link_to '課題と改善案の追加', new_team_issue_path(team) %></p>
+            <%= link_to team_path(team) do %>チーム<i class="bi bi-info-circle-fill text-info" style="font-size: 1.5rem;"></i><% end %>
               <% if current_user.id == team.owner_id %>
-                <a><%= link_to edit_team_path(team) do %><i class="bi bi-pencil-square text-success"></i><% end %></a>
-                <a><%= link_to team_path(team), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger"></i><% end %></a>
+                <a><%= link_to edit_team_path(team) do %><i class="bi bi-pencil-square text-success" style="font-size: 1.5rem;"></i><% end %></a>
+                <a><%= link_to team_path(team), method: :delete, data: { confirm: '本当に削除しますか?' } do %><i class="bi bi-trash3 text-danger" style="font-size: 1.5rem;"></i><% end %></a>
               <% end %>
-        </div>
+          </div>
           <div class="card-footer">
             <small class="text-muted">更新日：<%= team.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></small>
           </div>
+        </div>
       </div>
     <% end %>
   </div>
-
 
 
 

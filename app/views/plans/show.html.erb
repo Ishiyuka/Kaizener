@@ -1,9 +1,10 @@
 <div class = "container">
-  <h3>改善案の詳細</h3>
+  <h3><%= "#{@team.name}" %>の改善案の詳細</h3>
 
   <table class="table table-hover">
       <thead>
         <tr>
+          <th>チーム名</th>
           <th>#</th>
           <th>アクション</th>
           <th>担当者</th>
@@ -14,6 +15,7 @@
       </thead>
       <tbody>
         <tr>
+          <td><%= @team.name %></td>
           <td><%= @plan.action %></td>
           <td><%= @plan_pic %></td>
           <td><%= @plan.due_date_at %></td>

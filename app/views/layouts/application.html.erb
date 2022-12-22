@@ -20,7 +20,7 @@
 
 
   <body class="d-flex flex-column h-100">
-    <%# <div class="container"> %>
+    <!-- <div class="container"> %>-->
       <header class="p-3 bg-light text-dark">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -29,9 +29,9 @@
             </a>
             <% if user_signed_in? %>
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <%# <li><%= link_to('About', root_path, {class: "nav-link px-2 text-white"}) %></li>
+                <!-- <li><%= link_to('About', root_path, {class: "nav-link px-2 text-white"}) %>-->
                 <li><%= link_to("#{current_user.name}のマイページ", user_path(current_user), {class: "nav-link px-2 text-dark"})%></li>
-                <li><%= link_to('参加チーム一覧', teams_path(my_team: "true"), {class: "nav-link px-2 text-dark"}) %></li>
+                <li><%= link_to('所属チーム一覧', teams_path(my_team: "true"), {class: "nav-link px-2 text-dark"}) %></li>
                 <li><%= link_to('すべてのチーム一覧', teams_path, {class: "nav-link px-2 text-dark"}) %></li>
                   <% if current_user.try(:admin?) %>
                     <li><%= link_to('管理画面', rails_admin_path, {class: "nav-link px-2 text-dark"}) %></li>
@@ -54,9 +54,9 @@
             </div>
           </div>
       </header>
-    <%# </div> %>
+    <!--</div> %>-->
 
-    <main class="flex-shrink-0">
+    <main class="flex-shrink-0 md-5">
       <% if notice %>
         <p class="alert alert-notice"><%= notice %></p>
       <% end %>
@@ -69,10 +69,10 @@
         </div>
       </div>
     </main>
-
+    <br>
     <footer class="footer mt-auto py-3 bg-light  text-center" >
       <div class="container">
-        <span class="text-muted"><%= image_tag ("image.jpeg"), size: "50x50" %>Kaizener 2022</span>
+        <span class="text-muted"><%= image_tag ("image.jpeg"), size: "30x30" %>Kaizener 2022</span>
       </div>
     </footer>
 

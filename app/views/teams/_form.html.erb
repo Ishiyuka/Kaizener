@@ -11,19 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %><small>※必須</small>
-    <%= form.text_field :name, placeholder: "チーム名を記入しましょう" %>
+
+  <div class="row mb-3">
+    <%= form.label :name, {class: 'col-sm-2 col-form-label'} %><small class="text-danger">※必須</small>
+    <div class="col-sm-10">
+      <%= form.text_field :name, class: 'form-control', placeholder: 'チーム名を記入しましょう' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %><small>※任意</small>
-    <%= form.text_field :description, placeholder: "活動内容を記入しましょう" %>
+  <div class="row mb-3">
+    <%= form.label :description, {class: 'col-sm-2 col-form-label'} %><small class="text-danger">※必須</small>
+    <div class="col-sm-10">
+      <%= form.text_field :description, class: 'form-control', placeholder: '活動内容を記入しましょう' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :team_image ,'チーム写真' %><small>※任意</small>
-    <%= form.file_field :team_image %>
+  <div class="row mb-3">
+    <%= form.label :team_image, 'チーム写真', {class: 'col-sm-2 col-form-label'} %><small>※任意</small>
+    <div class="col-sm-5">
+      <%= form.file_field :team_image, class: 'form-control' %>
+    </div>
   </div>
 
   <div class="actions">

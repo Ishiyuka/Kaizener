@@ -21,16 +21,16 @@
           所属したいチームがない場合は作成出来ます。<br>
           チーム作成者はチームの編集と削除ができます。<br>
           メールアドレスを使って、招待できます。</p>
-          <p class="text-center"><%= link_to('チーム全体一覧', teams_path, {class: "btn btn-secondary me-2"}) %></p>
+          <p class="text-center"><%= link_to('チーム全体一覧', teams_path, {class: "btn btn-info me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4 text-center">
         <%= image_tag ("meeting.png"), class: "img-fluid rounded-circle", style: "border-radius: 50%; width: 280px; height: 250px; object-fit:cover;"%>
           <h2 class = "heading text-center" >課題</h2>
           <p class="text-center">
-          所属チーム一覧から該当チームの詳細画面で課題を作成します。<br>
+          所属チーム一覧から該当チームの画面で課題を作成します。<br>
           具体的に書くことで、解決策が見えてくるかもしれません。</p>
-          <p class="text-center"><%= link_to('所属チーム一覧', teams_path, {class: "btn btn-secondary me-2"}) %></p>
+          <p class="text-center"><%= link_to('所属チーム一覧', teams_path(my_team: "true"), {class: "btn btn-info me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
 
         <div class="col-lg-4 text-center">
@@ -40,7 +40,7 @@
           マイページでアクションプランを確認しましょう。<br>
           期限が近づいているアクションプランを優先的に行いましょう。<br>
           何か問題があれば遠慮なく、周りに相談しましょう。</p>
-          <p class="text-center"><p class="text-center"><%= link_to('Action一覧', user_path(current_user), {class: "btn btn-secondary me-2"}) %></p>
+          <p class="text-center"><p class="text-center"><%= link_to('Action一覧', user_path(current_user), {class: "btn btn-info me-2"}) %></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -103,10 +103,7 @@
       </div>
 
       <!-- START THE FEATURETTES -->
-
       <%# <hr class="featurette-divider"> %>
-
-
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">見える化</h2>

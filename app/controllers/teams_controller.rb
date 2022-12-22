@@ -9,8 +9,6 @@ class TeamsController < ApplicationController
     else
       @teams = Team.all
     end
-    # @users = User.all
-    # @team_members =
   end
 
   # GET /teams/1 or /teams/1.json

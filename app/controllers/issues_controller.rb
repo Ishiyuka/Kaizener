@@ -1,17 +1,17 @@
 class IssuesController < ApplicationController
   before_action :set_issue, only: %i[show edit update destroy]
-  before_action :set_q, only: %i[index search]
   before_action :set_teams, only: %i[create edit update]
 
   # GET /issues or /issues.json
   def index
-    @team = current_user.assign_teams
-    @issues = Issue.all
-    @issues = @issue_q.result.order(:due_date_at)
+    @team = Team.find(params[:team_id])
+    @issue_q = Issue.where(team_id: @team.id).ransack(params[:q])
+    @issues = @issue_q.result.order(:done_flag).order(:due_date_at)
     @plans = Plan.all
   end
 
   def search
+    @issue_q = Issue.ransack(params[:q])
     @results = @issue_q.result
   end
 
@@ -94,10 +94,6 @@ class IssuesController < ApplicationController
                                   :team_id,
                                   teams: %i[name owner_id],
                                   plans_attributes: %i[id user_id team_id action pic due_date_at status feedback _destroy])
-  end
-
-  def set_q
-    @issue_q = Issue.ransack(params[:q])
   end
 
   def set_teams
