@@ -21,7 +21,7 @@ ja:
         due_date_at: 期日
         priority: 優先度
         status: 状況
-        done_flag: 完了フラグ
+        done_flag: 完了
       plan:
         action: アクション
         pic: 担当者
