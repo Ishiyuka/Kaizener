@@ -1,5 +1,5 @@
 <h3><%= t('.display') %></h3>
-  <%= link_to '新たにチームを作成する', new_team_path, class: 'btn btn-primary' %>
+  <%= link_to '新たにチームを作成する', new_team_path, class: 'btn btn-primary' %><br><br >
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <% @teams.each do |team| %>
@@ -12,7 +12,7 @@
         <%end%>
         <div class="card-body">
             <%if team.members.include?(current_user) %>
-              <span class="badge bg-info">参加中</span>
+              <span class="badge bg-info">所属中</span>
             <% end %>
           <h5 class="card-title">チーム名：<strong><%= team.name %></strong></h5>
             <p class="card-text">詳細：<%= team.description %></p>
