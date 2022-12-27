@@ -17,7 +17,6 @@
 
 ## カリキュラム外の技術
 - ransack
-- chartkick
 - cocoon
 
 ## 実行手順
