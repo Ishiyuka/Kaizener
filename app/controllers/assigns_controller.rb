@@ -45,7 +45,7 @@ class AssignsController < ApplicationController
     end
   end
 
-  def find_team
+  def find_team(team_id)
     Team.find(params[:team_id])
   end
 end
