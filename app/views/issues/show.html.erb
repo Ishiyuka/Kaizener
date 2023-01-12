@@ -88,7 +88,7 @@
           <td><%= plan.due_date_at %></td>
           <td><%= plan.status %></td>
           <td><%= plan.feedback %></td>
-          <td><%= link_to team_issue_plan_path(@team, @issue) do %><i class="bi bi-info-circle-fill text-info" style="font-size: 1.5rem;"></i><% end %></td>
+          <td><%= link_to team_issue_plan_path(@team, @issue, plan) do %><i class="bi bi-info-circle-fill text-info" style="font-size: 1.5rem;"></i><% end %></td>
         </tr>
       <% end %>
       </tbody>

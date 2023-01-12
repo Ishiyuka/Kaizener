@@ -1,7 +1,6 @@
 <div class="container">
   <h2><%= t('.sign_in') %></h2>
 
-  <form class="row g-3">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="col-md-6">
         <%= f.label :email, {class: 'col-sm-2 col-form-label'} %>
@@ -28,7 +27,6 @@
         </div>
       </div>
     <% end %>
-  </form>
 
   <div class="row">
     <div class="col">
