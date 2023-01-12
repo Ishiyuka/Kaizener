@@ -18,7 +18,6 @@
               <th></th>
             </tr>
           </thead>
-          <% @issue.plans.each do |plan, i| %>
           <tbody>
             <tr>
               <td><%= f.text_area :action, placeholder: "課題に対して、解決するためのアクションを記入しましょう" %></td>
@@ -28,7 +27,6 @@
               <td><%= f.select :feedback, Plan.feedbacks.keys.to_a,include_blank: "選択して下さい"  %></td>
               <td><%= link_to_remove_association "削除", f, class: "btn btn-danger btn-block" %></td>
             </tr>
-          <% end %>
           </tbody>
         </table>
     </div>
